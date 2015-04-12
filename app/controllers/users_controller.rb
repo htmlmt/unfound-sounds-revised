@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       if @user.save
         UserMailer.signup_confirmation(@user).deliver
         session[:user_id] = @user.id
-        format.html { redirect_to(:rounds) }
+        format.html { redirect_to root_path }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
