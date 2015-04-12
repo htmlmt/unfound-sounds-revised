@@ -1,0 +1,35 @@
+<fieldset>
+    <h3>Album</h3>
+    
+    <%= f.label :title, "Title" %><br />
+    <%= f.text_field :title %><br />
+    <%= f.label :band, "Band" %><br />
+    <%= f.text_field :band %><br />
+    <%= f.label :cover, "Cover" %><br />
+    <%= f.text_field :cover %>
+    
+    <br>
+    
+    <%= f.fields_for :places do |builder| %>
+    <%= render 'place_fields', f: builder %>
+    <% end %>
+    
+    <br>
+    <hr>
+    <br>
+    
+    <%= f.fields_for :hints do |builder| %>
+        <%= render 'hint_fields', f: builder %>
+    <% end %>
+    
+    <%= link_to_add_fields "add hint", f, :hints %>
+    
+    <br>
+    <hr>
+    <br>
+    
+    <%= f.fields_for :users do |builder| %>
+        <%= render 'user_fields', f: builder %>
+    <% end %>
+    
+</fieldset>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @hint.name %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @hint.photo %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @hint.description %>
+</p>
+
+<p>
+  <strong>Thumbnail:</strong>
+  <%= @hint.thumbnail %>
+</p>
+
+<%= link_to 'Edit', edit_hint_path(@hint) %> |
+<%= link_to 'Back', hints_path %>

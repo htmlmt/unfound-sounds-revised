@@ -1,0 +1,22 @@
+label {
+    font-family: "bebas-neue";
+}
+
+fieldset h3 {
+    font-family: "bebas-neue";
+}
+
+.new_round {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.field select, fieldset select, fieldset input, .field textarea, fieldset textarea {
+    max-width: 50%;
+}
+
+fieldset {
+    border: 1px solid black;
+    padding: 5%;
+    margin-bottom: 5%;
+}

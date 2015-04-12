@@ -1,0 +1,4 @@
+<fieldset>
+    <h3>Finder</h3>
+    <%= f.collection_select :user_id, User.all, :id, :full_name, prompt: true %><br />
+</fieldset>

@@ -1,0 +1,60 @@
+.header {
+    @include flexbox();
+    @include flexbox-align-items(flex-end);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2% 1%;
+}
+
+.header--logo {
+    width: 8%;
+    margin-right: 1rem;
+}
+
+.header--title {
+    width: 60%;
+}
+
+.header--title h1 {
+    margin: 0;
+}
+
+.header--title h1 a {
+    font-family: "bebas-neue";
+    font-size: calc(100rem/16);
+    color: $siteRed;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.header--navigation {
+    width: calc(100%/3);
+}
+
+nav h3 {
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+}
+
+nav h3 {
+    font-family: "bebas-neue";
+    font-size: calc(30rem/16);
+    color: white;
+}
+
+.navigation--button {
+    background: $siteGreen;
+    border-bottom: .5rem solid $siteBlack;
+    text-align: center;
+    width: calc(50% - 1rem);
+    display: inline-block;
+    margin: 0 .5rem;
+}
+
+.navigation--button:active {
+    border-bottom: none;
+    @include transform-translate(0, .5rem);
+}

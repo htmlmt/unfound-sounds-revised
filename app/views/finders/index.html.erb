@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Finders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Photo</th>
+      <th>Album</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @finders.each do |finder| %>
+      <tr>
+        <td><%= finder.name %></td>
+        <td><%= finder.photo %></td>
+        <td><%= finder.album_id %></td>
+        <td><%= link_to 'Show', finder %></td>
+        <td><%= link_to 'Edit', edit_finder_path(finder) %></td>
+        <td><%= link_to 'Destroy', finder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Finder', new_finder_path %>
