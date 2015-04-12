@@ -25,8 +25,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
+    @user = User.new user_params.merge(card_token: user_params["card_token"])
+    raise "Please, check registration errors" unless @user.valid?
+    @user.process_payment
     respond_to do |format|
       if @user.save
         UserMailer.signup_confirmation(@user).deliver
@@ -68,9 +69,13 @@ class UsersController < ApplicationController
     def set_user
       @user = User.friendly.find(params[:id])
     end
+    
+    def stripe_params
+      params.permit :stripeEmail, :stripeToken
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :username, :album_id)
+      params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :username, :album_id, :card_token)
     end
 end

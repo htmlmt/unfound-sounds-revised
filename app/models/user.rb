@@ -14,4 +14,14 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+  
+  def process_payment
+    customer = Stripe::Customer.create email: email, source: card_token
+    binding.pry
+    Stripe::Charge.create customer: customer.id,
+                          amount: 300,
+                          description: "Unfound Sounds",
+                          currency: 'usd'
+
+  end
 end

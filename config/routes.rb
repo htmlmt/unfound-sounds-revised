@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get "signup" => "users#new", :as => "signup"
   resources :users
   resources :sessions
+  
+  resources :charges
 end
