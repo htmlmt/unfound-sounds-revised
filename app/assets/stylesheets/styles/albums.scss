@@ -1,7 +1,13 @@
-.albums {
+.body {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.body--albums {
     @include flexbox();
     @include flexbox-justify-content(center);
-    @include flexbox-align-items(top);
+    @include flexbox-align-items(center);
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
@@ -59,17 +65,17 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: calc((100%/3 * 2) - 2rem);
+    width: calc((100%/3 * 2) - 4rem);
     margin-left: 2rem;
     display: none;
 }
 
-.albums--round {
+.body--round {
     text-align: center;
     margin-top: 3%;
 }
 
-.albums--round h3 {
+.body--round h3 {
     font-family: "clavo";
     font-size: calc(19rem/16);
     text-transform: uppercase;
@@ -132,15 +138,88 @@
 .content--photo {
     @include flexbox();
     @include flexbox-justify-content(center);
-    @include flexbox-align-items(flex-start);
+    @include flexbox-align-items(stretch);
+    display: none;
+}
+
+.content--photo:last-of-type {
+    display: flex;
 }
 
 .photo--background {
     width: 60%;
-    padding-top: 35.5%;
+    padding-top: 37.5%;
     background-size: cover;
 }
 
 .photo--text {
     width: 40%;
+    position: relative;
+}
+
+.photo--text h5 {
+    font-family: "bebas-neue";
+    font-size: 1.5em;
+    text-align: center;
+    color: $siteBlack;
+    border-top: 1px solid $siteBlack;
+    border-bottom: 1px solid $siteBlack;
+}
+
+.next-prev--container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.text--hints {
+    background-color: $siteGreen;
+    color: white;
+}
+
+.text--next, .text--prev {
+    cursor: pointer;
+    display: inline-block;
+    color: white;
+}
+
+.text--hints {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: .5em;
+}
+
+.text--prev {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 15%;
+    padding: .7em;
+    line-height: .9;
+}
+
+.text--next {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 15%;
+    padding: .7em;
+    line-height: .9;
+}
+
+.body--prev {
+    position: absolute;
+    top: 50%;
+    @include transform-translate(0, -50%);
+    left: 0;
+}
+
+.body--next {
+    position: absolute;
+    top: 50%;
+    @include transform-translate(0, -50%);
+    right: 0;
 }

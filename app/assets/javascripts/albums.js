@@ -1,16 +1,34 @@
 $(document).on("page:load", function(){
     showAlbumInfo();
+    $(".text--prev").click(function(){
+        $(this).parent().parent().parent().hide();
+        $(this).parent().parent().parent().prev().css("display", "flex");
+    });
+    
+    $(".text--next").click(function(){
+        $(this).parent().parent().parent().hide();
+        $(this).parent().parent().parent().next().css("display", "flex");
+    });
 });
 
 $(document).ready(function(){
     showAlbumInfo();
+    $(".text--prev").click(function(){
+        $(this).parent().parent().parent().hide();
+        $(this).parent().parent().parent().prev().css("display", "flex");
+    });
+    
+    $(".text--next").click(function(){
+        $(this).parent().parent().parent().hide();
+        $(this).parent().parent().parent().next().css("display", "flex");
+    });
 });
 
 function showAlbumInfo() {
     $(".albums--album").on("click", toggleAlbumInfo);
     
     var showingAlbumInfo = false;
-    var round = $(".albums--round h3").text();
+    var round = $(".body--round h3").text();
     
     function toggleAlbumInfo() {
         if (showingAlbumInfo === false) {
@@ -28,9 +46,12 @@ function showAlbumInfo() {
                 $(".albums--album:nth-of-type(2)").addClass('move-once');
                 $(".album--content:nth-of-type(3)").fadeIn(500);
             }
-            $(".albums--round h3").text("see all records");
-            $(".albums--round").on("click", toggleAlbumInfo);
-            $(".albums--round").css("cursor", "pointer");
+            $(".body--round h3").text("see all records");
+            $(".body--round").on("click", toggleAlbumInfo);
+            $(".body--round").css("cursor", "pointer");
+            
+            $(".body--next").fadeOut(500);
+            $(".body--prev").fadeOut(500);
             
             showingAlbumInfo = true;
         } else {
@@ -38,9 +59,12 @@ function showAlbumInfo() {
             $(".albums--album").removeClass("move-once");
             $(".albums--album").removeClass("move-twice");
             $(".albums--album").removeClass("top");
-            $(".albums--round h3").text(round);
-            $(".albums--round").off("click", toggleAlbumInfo);
-            $(".albums--round").css("cursor", "text");
+            $(".body--round h3").text(round);
+            $(".body--round").off("click", toggleAlbumInfo);
+            $(".body--round").css("cursor", "text");
+            
+            $(".body--next").fadeIn(500);
+            $(".body--prev").fadeIn(500);
             
             showingAlbumInfo = false;
         }

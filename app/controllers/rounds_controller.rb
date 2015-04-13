@@ -34,7 +34,7 @@ class RoundsController < ApplicationController
     
     respond_to do |format|
       if @round.save
-        format.html { redirect_to @round, notice: 'Round was successfully created.' }
+        format.html { redirect_to @round }
         format.json { render :show, status: :created, location: @round }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class RoundsController < ApplicationController
   def update
     respond_to do |format|
       if @round.update(round_params)
-        format.html { redirect_to @round, notice: 'Round was successfully updated.' }
+        format.html { redirect_to @round }
         format.json { render :show, status: :ok, location: @round }
       else
         format.html { render :edit }
