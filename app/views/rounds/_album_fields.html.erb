@@ -6,7 +6,7 @@
     <%= f.label :band, "Band" %><br />
     <%= f.text_field :band %><br />
     <%= f.label :cover, "Cover" %><br />
-    <%= f.text_field :cover %>
+    <%= f.file_field :cover %>
     
     <br>
     
@@ -28,8 +28,11 @@
     <hr>
     <br>
     
-    <%= f.fields_for :users do |builder| %>
-        <%= render 'user_fields', f: builder %>
+    <%= f.fields_for :find do |builder| %>
+        <%= render 'find_fields', f: builder %>
     <% end %>
     
+    <br>
+    <hr>
+    <br>
 </fieldset>

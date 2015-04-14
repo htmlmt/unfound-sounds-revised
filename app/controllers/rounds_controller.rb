@@ -10,16 +10,18 @@ class RoundsController < ApplicationController
   # GET /rounds/1
   # GET /rounds/1.json
   def show
+    user_location = request.location
+    @user_lat_long = user_location.latitude + user_location.longitude
   end
 
   # GET /rounds/new
   def new
     @round = Round.new
     3.times do
-        album = @round.albums.build
-        1.times { album.places.build }
-        5.times { album.hints.build }
-        1.times { album.finders.build }
+        @album = @round.albums.build
+        1.times { @album.places.build }
+        5.times { @album.hints.build }
+        1.times { @album.build_find }
     end
   end
 
@@ -79,12 +81,11 @@ class RoundsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def round_params
-      params.require(:round).permit(:month, 
+      params.require(:round).permit(:month,
       albums_attributes: [:id, :title, :band, :cover, :rdio_link, :found, :link, :link_text, :round_id, :review,
-        places_attributes: [:id, :teaser, :name, :link, :address, :city, :state, :description, :link_text, :album_id,
-          features_attributes: [:id, :name, :description, :photo, :thumbnail]],
-        users_attributes: [:email, :password, :password_confirmation, :first_name, :last_name, :username, :album_id],
-        hints_attributes: [:id, :name, :description, :photo, :thumbnail, :album_id]
+        places_attributes: [:id, :teaser, :name, :link, :address, :city, :state, :description, :link_text, :album_id],
+        hints_attributes: [:id, :name, :description, :photo, :thumbnail, :album_id],
+        find_attributes: [:id, :user_id, :album_id, :photo]
       ])
     end
 end

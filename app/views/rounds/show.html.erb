@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <main class="body">
     <% if @round.id != Round.where("month < ?", Date.today).count %>
         <div class="body--prev">
@@ -21,20 +19,20 @@
                 <header class="content--title">
                     <h1><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></h1>
                 </header>
-                <% if album.finders != [] %>
+                <% if album.find != nil %>
                     <% album.places.each do |place| %>
                         <div class="content--description">
                             <h4>
                                 <em>found at <%= link_to place.name, place.link %> by 
-                                <% place.album.finders.each do |finder| %> 
-                                    <%= link_to finder.name, finder_path(finder) %>
-                                <% end %>
+                                <%= link_to "#{album.find.user.first_name} #{album.find.user.last_name}", user_path(album.find.user) %>
                                 </em>
                             </h4>
                         </div>
                         <div class="content--photo">
-                            <div class="photo--background">
-                            </div>
+                            <a href="<%= user_path(album.find.user) %>">
+                                <div class="photo--background" style="background-image: url(<%= album.find.photo %>)">
+                                </div>
+                            </a>
                             <div class="photo--text">
                                 <%= place.description %>
                             </div>

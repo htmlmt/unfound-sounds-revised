@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :finds
+
   resources :features
 
   root 'rounds#show'

@@ -20,6 +20,6 @@ ocs = Place.create(name: "Omaha Code School", description: "Omaha Code School of
 
 patrick.places << ocs
 
-beck.create_user(email: "jeff@example.com", first_name: "Jeff", last_name: "Spiehs", password: "password", password_confirmation: "password", username: "jeffspiehs")
+jeff = User.create(email: "jeff@example.com", first_name: "Jeff", last_name: "Spiehs", password: "password", password_confirmation: "password", username: "jeffspiehs")
 
-bonnie.create_user(email: "tim@example.com", first_name: "Tim", last_name: "Guthrie", password: "password", password_confirmation: "password", username: "timguthrie")
+tim = User.create(email: "tim@example.com", first_name: "Tim", last_name: "Guthrie", password: "password", password_confirmation: "password", username: "timguthrie")

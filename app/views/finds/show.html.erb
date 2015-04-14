@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @find.album_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @find.user_id %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @find.photo %>
+</p>
+
+<%= link_to 'Edit', edit_find_path(@find) %> |
+<%= link_to 'Back', finds_path %>

@@ -47,14 +47,8 @@ nav h3 {
 
 .navigation--button {
     background: $siteGreen;
-    border-bottom: .5rem solid $siteBlack;
     text-align: center;
     width: calc(50% - 1rem);
     display: inline-block;
     margin: 0 .5rem;
-}
-
-.navigation--button:active {
-    border-bottom: none;
-    @include transform-translate(0, .5rem);
 }

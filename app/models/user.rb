@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
   
-  belongs_to :album
+  has_many :finds
+  
+  mount_uploader :photo, FinderUploader
   
   def full_name
     "#{first_name} #{last_name}"
@@ -17,7 +19,6 @@ class User < ActiveRecord::Base
   
   def process_payment
     customer = Stripe::Customer.create email: email, source: card_token
-    binding.pry
     Stripe::Charge.create customer: customer.id,
                           amount: 300,
                           description: "Unfound Sounds",

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412222544) do
+ActiveRecord::Schema.define(version: 20150413223756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20150412222544) do
 
   add_index "finders", ["slug"], name: "index_finders_on_slug", unique: true, using: :btree
 
+  create_table "finds", force: :cascade do |t|
+    t.string   "album_id"
+    t.string   "user_id"
+    t.string   "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "hints", force: :cascade do |t|
     t.string   "name"
     t.string   "photo"
@@ -80,6 +88,8 @@ ActiveRecord::Schema.define(version: 20150412222544) do
     t.string   "link_text"
     t.string   "slug"
     t.string   "teaser"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "places", ["slug"], name: "index_places_on_slug", unique: true, using: :btree
@@ -110,6 +120,7 @@ ActiveRecord::Schema.define(version: 20150412222544) do
     t.string   "slug"
     t.integer  "album_id"
     t.string   "card_token"
+    t.string   "photo"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

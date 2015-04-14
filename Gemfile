@@ -62,3 +62,7 @@ gem 'fog'
 gem 'rails_12factor', group: :production
 
 gem 'stripe'
+
+gem 'geokit'
+
+gem 'geocoder'
