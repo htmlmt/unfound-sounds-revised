@@ -25,11 +25,15 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new user_params.merge(card_token: user_params["card_token"])
-    @user.process_payment
+    if user_params["card_token"] != ""
+      @user = User.new user_params.merge(card_token: user_params["card_token"])
+      @user.process_payment
+    end
     respond_to do |format|
       if @user.save
-        UserMailer.signup_confirmation(@user).deliver
+        if @user.email != ""
+          UserMailer.signup_confirmation(@user).deliver
+        end
         session[:user_id] = @user.id
         format.html { redirect_to root_path }
         format.json { render :show, status: :created, location: @user }

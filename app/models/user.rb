@@ -3,13 +3,14 @@ class User < ActiveRecord::Base
   
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  validates_presence_of :username
+  validates_uniqueness_of :username
   
   extend FriendlyId
   friendly_id :username, use: :slugged
   
   has_many :finds
+  has_and_belongs_to_many :rounds
   
   mount_uploader :photo, FinderUploader
   

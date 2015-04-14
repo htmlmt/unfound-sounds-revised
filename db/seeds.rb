@@ -1,12 +1,12 @@
-round = Round.create(month: Date.parse("2014-05-01"))
+round_one = Round.create(month: Date.parse("2014-05-01"))
 
-beck = Album.create(title: "Morning Phase", band: "Beck", cover: "http://rdio1img-a.akamaihd.net/album/e/9/2/00000000003e929e/3/square-600.jpg", rdio_link: "https://rd.io/i/QUWZfCJhwN8/", link: "https://rd.io/i/QUWZfCJhwN8/", link_text: "listen on Rdio")
-bonnie = Album.create(title: "I See a Darkness", band: "Bonnie \"Prince\" Billy", cover: "http://24.media.tumblr.com/tumblr_mbwx7pmaqe1rqkia0o1_1280.jpg", rdio_link: nil, link: "https://www.youtube.com/watch?v=LAriDxTeed8", link_text: "listen on YouTube")
-patrick = Album.create(title: "Adventures in Your Own Backyard", band: "Patrick Watson", cover: "http://blog.atwestend.com/wp-content/uploads/2012/08/Patrick-Watson-Adventures-In-Your-Own-Backyard-11.jpeg", link: "http://www.rdio.com/artist/Patrick_Watson/album/Adventures_In_Your_Own_Backyard_1/", link_text: "listen on Rdio")
+beck = Album.create(title: "Morning Phase", band: "Beck", rdio_link: "https://rd.io/i/QUWZfCJhwN8/", link: "https://rd.io/i/QUWZfCJhwN8/", link_text: "listen on Rdio")
+bonnie = Album.create(title: "I See a Darkness", band: "Bonnie \"Prince\" Billy", rdio_link: nil, link: "https://www.youtube.com/watch?v=LAriDxTeed8", link_text: "listen on YouTube")
+patrick = Album.create(title: "Adventures in Your Own Backyard", band: "Patrick Watson", link: "http://www.rdio.com/artist/Patrick_Watson/album/Adventures_In_Your_Own_Backyard_1/", link_text: "listen on Rdio")
 
-round.albums << beck
-round.albums << bonnie
-round.albums << patrick
+round_one.albums << beck
+round_one.albums << bonnie
+round_one.albums << patrick
 
 fruitful = Place.create(name: "Fruitful Design", description: "Fruitful is a unique graphic design shop in Omaha, Nebraska, that specializes in branding, illustration, print media and web design.", link: "http://fruitful-design.com/", link_text: "visit Fruitful Design online", address: "2740 N. 60th Ave.", city: "Omaha", state: "NE")
 
@@ -20,6 +20,14 @@ ocs = Place.create(name: "Omaha Code School", description: "Omaha Code School of
 
 patrick.places << ocs
 
-jeff = User.create(email: "jeff@example.com", first_name: "Jeff", last_name: "Spiehs", password: "password", password_confirmation: "password", username: "jeffspiehs")
+jeff = User.create(email: "jeff@example.com", first_name: "Jeff", last_name: "Spiehs", password: "password", password_confirmation: "password", username: "jeff")
 
-tim = User.create(email: "tim@example.com", first_name: "Tim", last_name: "Guthrie", password: "password", password_confirmation: "password", username: "timguthrie")
+tim = User.create(email: "tim@example.com", first_name: "Tim", last_name: "Guthrie", password: "password", password_confirmation: "password", username: "tim")
+
+shelly = User.create(email: "shelly@example.com", first_name: "Shelly Lynn", last_name: "Xiong", password: "password", password_confirmation: "password", username: "shelly")
+
+round_one.users << [jeff, tim, shelly]
+
+beck.create_find(user_id: jeff.id)
+bonnie.create_find(user_id: tim.id)
+patrick.create_find(user_id: shelly.id)
