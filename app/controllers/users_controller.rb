@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new user_params.merge(card_token: user_params["card_token"])
-    raise "Please, check registration errors" unless @user.valid?
     @user.process_payment
     respond_to do |format|
       if @user.save

@@ -1,64 +1,104 @@
-<%= form_for @user, html: { class: "body--register" } do |f| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-            <h2>
-                <%= pluralize(@user.errors.count, "error") %>
-                prohibited this user from being saved:
-            </h2>
-            <ul>
-                <% @user.errors.full_messages.each do |message| %>
-                    <li>
-                        <%= message %>
-                    </li>
-                <% end %>
-            </ul>
+<main class="login">
+    <%= form_for @user, html: { class: "body--register" } do |f| %>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+                <h2>
+                    <%= pluralize(@user.errors.count, "error") %>
+                    prohibited this user from being saved:
+                </h2>
+                <ul>
+                    <% @user.errors.full_messages.each do |message| %>
+                        <li>
+                            <%= message %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <div class="register--field">
+            <%= f.label :first_name %><br>
+            <%= f.text_field :first_name %>
+        </div>
+        <div class="register--field">
+            <%= f.label :last_name %><br>
+            <%= f.text_field :last_name %>
+        </div>
+        <div class="register--field">
+            <%= f.label :username %><br>
+            <%= f.text_field :username %>
+        </div>
+        <div class="register--field">
+            <%= f.label :email %><br>
+            <%= f.text_field :email %>
+        </div>
+        <div class="register--field">
+            <%= f.label :password %><br />
+            <%= f.password_field :password %>
+        </div>
+        <div class="register--field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation %>
+        </div>
+        
+        <div id="flash-messages"></div>
+        <%= javascript_include_tag "https://js.stripe.com/v2/" %>
+        <script>
+            Stripe.setPublishableKey("<%= ENV["PUBLISHABLE_KEY"] %>");
+        </script>
+            
+        <h3>Want to see hints? Find your next vinyl for only $2</h3>
+        
+        <%= label_tag "Card Number", nil, required: true %>
+        <div class="control-group">
+            <div class="controls">
+                <%= text_field_tag :card_number, nil, class: "input-block-level", data: {stripe: "number"} %>
+            </div>
+        </div>
+        <%= label_tag "Card Verification", nil, required: true %>
+        <div class="control-group">
+            <div class="controls">
+              <%= text_field_tag :card_verification, nil, class: "input-block-level", data: {stripe: "cvv"} %>
+            </div>
+        </div>
+        <%= label_tag "Card Expires", nil, required: true %>
+        <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, data: {stripe: "exp-month"}, class: "span2" %>
+        <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, data: {stripe: "exp-year"}, class: "span1" %>
+        <div class="actions">
+            <%= f.submit "Submit Payment" %>
         </div>
     <% end %>
-    <div class="register--field">
-        <%= f.label :first_name %><br>
-        <%= f.text_field :first_name %>
-    </div>
-    <div class="register--field">
-        <%= f.label :last_name %><br>
-        <%= f.text_field :last_name %>
-    </div>
-    <div class="register--field">
-        <%= f.label :username %><br>
-        <%= f.text_field :username %>
-    </div>
-    <div class="register--field">
-        <%= f.label :email %><br>
-        <%= f.text_field :email %>
-    </div>
-    <div class="register--field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password %>
-    </div>
-    <div class="register--field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation %>
-    </div>
-    <div id="flash-messages"></div>
-    <%= javascript_include_tag "https://js.stripe.com/v2/" %>
-    <script>
-        Stripe.setPublishableKey("<%= ENV["PUBLISHABLE_KEY"] %>");
-    </script>
-    <%= label_tag "Card Number", nil, required: true %>
-    <div class="control-group">
-        <div class="controls">
-            <%= text_field_tag :card_number, nil, class: "input-block-level", data: {stripe: "number"} %>
-        </div>
-    </div>
-    <%= label_tag "Card Verification", nil, required: true %>
-    <div class="control-group">
-        <div class="controls">
-          <%= text_field_tag :card_verification, nil, class: "input-block-level", data: {stripe: "cvv"} %>
-        </div>
-    </div>
-    <%= label_tag "Card Expires", nil, required: true %>
-    <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, data: {stripe: "exp-month"}, class: "span2" %>
-    <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, data: {stripe: "exp-year"}, class: "span1" %>
-    <div class="actions">
-        <%= f.submit "Submit Payment", class: "btn", style: "color: white;background: rgb(242, 118, 73);" %>
-    </div>
-<% end %>
+</main>
+<script>
+    var show_error, stripeResponseHandler;
+    $("#new_user").submit(function (event) {
+        var $form;
+        $form = $(this);
+        $form.find("input[type=submit]").prop("disabled", true);
+        Stripe.card.createToken($form, stripeResponseHandler);
+        return false;
+    });
+
+    stripeResponseHandler = function (status, response) {
+        var $form, token;
+        $form = $("#new_user");
+        if (response.error) {
+            show_error(response.error.message);
+            $form.find("input[type=submit]").prop("disabled", false);
+    } else {
+        token = response.id;
+        $form.append($("<input type=\"hidden\" name=\"user[card_token]\" />").val(token));
+        $("[data-stripe=number]").remove();
+        $("[data-stripe=cvv]").remove();
+        $("[data-stripe=exp-year]").remove();
+        $("[data-stripe=exp-month]").remove();
+        $form.get(0).submit();
+    }
+        return false;
+    };
+
+    show_error = function (message) {
+        $("#flash-messages").html('<div class="alert alert-warning"><a class="close" data-dismiss="alert">×</a><div id="flash_alert">' + message + '</div></div>');
+        $('.alert').delay(5000).fadeOut(3000);
+        return false;
+    };
+</script>

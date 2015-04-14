@@ -1,6 +1,8 @@
-<h1>Editing Round</h1>
-
+<main class="body">
 <%= render 'form' %>
+
+<p><%= link_to 'Destroy',  @round,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
 <%= link_to 'Show', @round %> |
 <%= link_to 'Back', rounds_path %>
+</main>

@@ -1,0 +1,65 @@
+button, .button, input[type="button"], input[type="submit"], input[type="reset"] {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0.5em 1.5em;
+    background-color: $siteGreen;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    color: #ffffff;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 0.875em;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+button:hover, button:focus, button:visited, .button:hover, .button:focus, .button:visited, input[type="button"]:hover, input[type="button"]:focus, input[type="button"]:visited, input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:visited, input[type="reset"]:hover, input[type="reset"]:focus, input[type="reset"]:visited {
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+}
+
+input, textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #DDDDDD;
+}
+ 
+input:focus, textarea:focus {
+    box-shadow: 0 0 5px $siteGreen;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid $siteGreen;
+}
+
+.login {
+    max-width: 975px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    @include clearfix();
+}
+
+.login .register--field {
+    width: 50%;
+    float: left;
+}
+
+.login .register--field:nth-of-type(odd) {
+    padding-right: .5em;
+}
+
+.login .register--field:nth-of-type(even) {
+    padding-left: .5em;
+}
+
+.login--submit {
+    margin-top: 1em;
+}

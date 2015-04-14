@@ -1,49 +1,88 @@
-<p id="notice"><%= notice %></p>
-
-<div class="albums">
 <% @rounds.each do |round| %>
-    <% round.albums.each do |album| %>
-        <section class="albums--album">
-            <div class="album--image">
-                <%= image_tag(album.cover) %>
+    <main class="body">
+        <% if round.id != Round.where("month < ?", Date.today).count %>
+            <div class="body--prev">
+                <a href="/rounds/<%= Round.where(month: @round.month + 1.month).first.id %>">
+                    <%= image_tag "prev.png" %>
+                </a>
             </div>
-        </section>
-    <% end %>
-    <% round.albums.each do |album| %>
-        <div class="album--content">
-            <header class="content--title">
-                <h1><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></h1>
-            </header>
-            <% if album.finders != [] %>
-                <% album.places.each do |place| %>
-                    <div class="content--description">
-                        <h4>
-                            <em>found at <%= link_to place.name, place.link %> by 
-                            <% place.album.finders.each do |finder| %> 
-                                <%= link_to finder.name, finder_path(finder) %>
-                            <% end %>
-                            </em>
-                        </h4>
+        <% end %>
+        <div class="body--albums">
+            <% round.albums.each do |album| %>
+                <section class="albums--album">
+                    <div class="album--image">
+                        <%= image_tag(album.cover) %>
                     </div>
-                <% end %>
-            <% else %>
-                <% album.places.each do |place| %>
-                    <div class="content--description">
-                        <h4>
-                            <em><%= place.teaser %></em>
-                        </h4>
-                    </div>
-                    <ul>
-                        <% album.hints.each do |hint| %>
-                            <li><%= hint.name %></li>
+                </section>
+            <% end %>
+            <% round.albums.each do |album| %>
+                <div class="album--content">
+                    <header class="content--title">
+                        <h1><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></h1>
+                    </header>
+                    <% if album.find != nil %>
+                        <% album.places.each do |place| %>
+                            <div class="content--description">
+                                <h4>
+                                    <em>found at <%= link_to place.name, place.link %> by 
+                                    <%= link_to "#{album.find.user.first_name} #{album.find.user.last_name}", user_path(album.find.user) %>
+                                    </em>
+                                </h4>
+                            </div>
+                            <div class="content--photo">
+                                <a href="<%= user_path(album.find.user) %>">
+                                    <div class="photo--background" style="background-image: url(<%= album.find.photo %>)">
+                                    </div>
+                                </a>
+                                <div class="photo--text">
+                                    <%= place.description %>
+                                </div>
+                            </div>
                         <% end %>
-                    </ul>
-                <% end %>
+                    <% else %>
+                        <% album.places.each do |place| %>
+                            <div class="content--description">
+                                <h4>
+                                    <em>hidden somewhere in <%= place.city %></em>
+                                </h4>
+                            </div>
+                            <% album.hints.each_with_index do |hint, index| %>
+                                <div class="content--photo">
+                                    <div class="photo--text">
+                                        <h5>hint #<%= index + 1 %></h5>
+                                        <p><%= hint.description %></p>
+                                        <div class="next-prev--container">
+                                            <p class="text--hints">
+                                                see more hints
+                                            </p>
+                                            <% if index == 0 %>
+                                                <div class="text--next first">▶</div>
+                                            <% elsif index > 0 && index + 1 < album.hints.count && Date.today.day >= album.hints.count %>
+                                                <div class="text--prev">◀</div>
+                                                <div class="text--next">▶</div>
+                                            <% else %>
+                                                <div class="text--prev">◀</div>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                    <div class="photo--background" style="background-image: url(<%= hint.photo %>)">
+                                    </div>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </div>
             <% end %>
         </div>
-    <% end %>
-</div>
-<div class="albums--round">
-    <h3>Vinyl Treasure Hunt #<%= @rounds.count %>: <%= round.month.strftime("%B 1-8, %Y") %></h3>
-</div>
+        <% if round.id != 1 %>
+            <div class="body--next">
+                <a href="/rounds/<%= Round.where(month: @round.month - 1.month).first.id %>">
+                    <%= image_tag "next.png" %>
+                </a>
+            </div>
+        <% end %>
+    </main>
+    <div class="body--round">
+        <h3>Vinyl Treasure Hunt #<%= round.id %>: <%= round.month.strftime("%B 1-8, %Y") %></h3>
+    </div>
 <% end %>

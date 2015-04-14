@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def process_payment
     customer = Stripe::Customer.create email: email, source: card_token
     Stripe::Charge.create customer: customer.id,
-                          amount: 300,
+                          amount: 200,
                           description: "Unfound Sounds",
                           currency: 'usd'
 
