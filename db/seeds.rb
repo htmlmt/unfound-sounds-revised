@@ -1,8 +1,8 @@
 round_one = Round.create(month: Date.parse("2014-05-01"))
 
-beck = Album.create(title: "Morning Phase", band: "Beck", rdio_link: "https://rd.io/i/QUWZfCJhwN8/", cover: File.open('/Users/mikejtodd/Desktop/square-600 (2).jpg'))
-bonnie = Album.create(title: "I See a Darkness", band: "Bonnie \"Prince\" Billy", link: "https://www.youtube.com/watch?v=LAriDxTeed8", link_text: "listen on YouTube", cover: File.open('/Users/mikejtodd/Desktop/tumblr_mbwx7pmaqe1rqkia0o1_1280.jpg'))
-patrick = Album.create(title: "Adventures in Your Own Backyard", band: "Patrick Watson", rdio_link: "https://rd.io/i/QUWZfCJINgM/", cover: File.open('/Users/mikejtodd/Desktop/Patrick-Watson-Adventures-In-Your-Own-Backyard-11.jpeg'))
+beck = Album.create(title: "Morning Phase", band: "Beck", rdio_link: "https://rd.io/i/QUWZfCJhwN8/")
+bonnie = Album.create(title: "I See a Darkness", band: "Bonnie \"Prince\" Billy", link: "https://www.youtube.com/watch?v=LAriDxTeed8", link_text: "listen on YouTube")
+patrick = Album.create(title: "Adventures in Your Own Backyard", band: "Patrick Watson", rdio_link: "https://rd.io/i/QUWZfCJINgM/")
 
 round_one.albums << beck
 round_one.albums << bonnie
@@ -28,15 +28,15 @@ shelly = User.create(email: "shelly@example.com", first_name: "Shelly Lynn", las
 
 round_one.users << [jeff, tim, shelly]
 
-beck.create_find(user_id: jeff.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/jeff-photo.jpg'))
-bonnie.create_find(user_id: tim.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/tim-photo.jpg'))
+beck.create_find(user_id: jeff.id)
+bonnie.create_find(user_id: tim.id)
 patrick.create_find(user_id: shelly.id)
 
 round_two = Round.create(month: Date.parse("2014-06-01"))
 
-kishi = Album.create(title: "Lighght", band: "Kishi Bashi", rdio_link: "https://rd.io/i/QUWZfCIclAc/", cover: File.open('/Users/mikejtodd/Desktop/a2536486315_10.jpg'))
-bright = Album.create(title: "I'm Wide Awake, It's Morning", band: "Bright Eyes", rdio_link: "https://rd.io/i/QUWZfCJUC3E/", cover: File.open('/Users/mikejtodd/Desktop/Bright-Eyes-Im-Wide-Awake-Its-Morning.jpg'))
-lucius = Album.create(title: "Wildewoman", band: "Lucius", rdio_link: "https://rd.io/i/QUWZfCJrd9U/", cover: File.open('/Users/mikejtodd/Desktop/square-600.jpg'))
+kishi = Album.create(title: "Lighght", band: "Kishi Bashi", rdio_link: "https://rd.io/i/QUWZfCIclAc/")
+bright = Album.create(title: "I'm Wide Awake, It's Morning", band: "Bright Eyes", rdio_link: "https://rd.io/i/QUWZfCJUC3E/")
+lucius = Album.create(title: "Wildewoman", band: "Lucius", rdio_link: "https://rd.io/i/QUWZfCJrd9U/")
 
 round_two.albums << kishi
 round_two.albums << bright
@@ -62,15 +62,15 @@ brittany = User.create(email: "brittany@example.com", first_name: "Brittany", la
 
 round_two.users << [molly, dan, brittany]
 
-kishi.create_find(user_id: molly.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/molly-photo.jpg'))
-bright.create_find(user_id: dan.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/dan-photo.jpg'))
-lucius.create_find(user_id: brittany.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/brittany-photo.jpg'))
+kishi.create_find(user_id: molly.id)
+bright.create_find(user_id: dan.id)
+lucius.create_find(user_id: brittany.id)
 
 round_three = Round.create(month: Date.parse("2014-07-01"))
 
-kill_county = Album.create(title: "Dust In Wire", band: "Kill County", rdio_link: "https://rd.io/i/QUWZfCIOln8/", cover: File.open('/Users/mikejtodd/Desktop/kill_county.jpg'))
-jack_hotel = Album.create(title: "Good Sons And Daughters", band: "Jack Hotel", rdio_link: "", cover: File.open('/Users/mikejtodd/Desktop/jack-hotel.jpg'))
-first_aid_kit = Album.create(title: "Stay Gold", band: "First Aid Kit", rdio_link: "https://rd.io/i/QUWZfCIacDw/", cover: File.open('/Users/mikejtodd/Desktop/first-aid-kit.jpg'))
+kill_county = Album.create(title: "Dust In Wire", band: "Kill County", rdio_link: "https://rd.io/i/QUWZfCIOln8/")
+jack_hotel = Album.create(title: "Good Sons And Daughters", band: "Jack Hotel", rdio_link: "")
+first_aid_kit = Album.create(title: "Stay Gold", band: "First Aid Kit", rdio_link: "https://rd.io/i/QUWZfCIacDw/")
 
 round_three.albums << kill_county
 round_three.albums << jack_hotel
@@ -94,15 +94,15 @@ matthew = User.create(email: "matthew@example.com", first_name: "Matthew", last_
 
 round_three.users << [liz, matthew, jeff]
 
-kill_county.create_find(user_id: liz.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/dan-liz-photo.jpg'))
-jack_hotel.create_find(user_id: matthew.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/matthew-photo.jpg'))
-first_aid_kit.create_find(user_id: jeff.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/jeff-photo-2.jpg'))
+kill_county.create_find(user_id: liz.id)
+jack_hotel.create_find(user_id: matthew.id)
+first_aid_kit.create_find(user_id: jeff.id)
 
 round_four = Round.create(month: Date.parse("2014-08-01"))
 
-chuck_brown = Album.create(title: "Bustin' Loose", band: "Chuck Brown", rdio_link: "https://rd.io/i/QUWZfCJaVUc/", cover: File.open('/Users/mikejtodd/Desktop/chuck-brown.jpg'))
-eternal_summers = Album.create(title: "The Drop Beneath", band: "Eternal Summers", rdio_link: "https://rd.io/i/QUWZfCJgZxE/", cover: File.open('/Users/mikejtodd/Desktop/eternal-summers.jpg'))
-mccarthy_trenching = Album.create(title: "Plays Piano", band: "McCarthy Trenching", cover: File.open('/Users/mikejtodd/Desktop/mccarthy.jpg'))
+chuck_brown = Album.create(title: "Bustin' Loose", band: "Chuck Brown", rdio_link: "https://rd.io/i/QUWZfCJaVUc/")
+eternal_summers = Album.create(title: "The Drop Beneath", band: "Eternal Summers", rdio_link: "https://rd.io/i/QUWZfCJgZxE/")
+mccarthy_trenching = Album.create(title: "Plays Piano", band: "McCarthy Trenching")
 
 round_four.albums << chuck_brown
 round_four.albums << eternal_summers
@@ -128,15 +128,15 @@ jordan = User.create(email: "jordan@example.com", first_name: "Jordan", last_nam
 
 round_four.users = [will, matthew, jordan]
 
-chuck_brown.create_find(user_id: will.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/will-photo.jpg'))
-eternal_summers.create_find(user_id: curtis.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/curtis-photo.jpg'))
-mccarthy_trenching.create_find(user_id: jordan.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/jordan-photo.jpg'))
+chuck_brown.create_find(user_id: will.id)
+eternal_summers.create_find(user_id: curtis.id)
+mccarthy_trenching.create_find(user_id: jordan.id)
 
 round_five = Round.create(month: Date.parse("2014-09-01"))
 
-deleted_scenes = Album.create(title: "Lithium Burn", band: "Deleted Scenes", rdio_link: "https://rd.io/i/QUWZfCJg-AI/", cover: File.open('/Users/mikejtodd/Desktop/deleted-scenes.jpg'))
-willie = Album.create(title: "Red Headed Stranger", band: "Willie Nelson", rdio_link: "https://rd.io/i/QUWZfCJclmA/", cover: File.open('/Users/mikejtodd/Desktop/willie-nelson.jpg'))
-future_islands = Album.create(title: "Singles", band: "Future Islands", rdio_link: "https://rd.io/i/QUWZfCIfQkw/", cover: File.open('/Users/mikejtodd/Desktop/future-islands.jpg'))
+deleted_scenes = Album.create(title: "Lithium Burn", band: "Deleted Scenes", rdio_link: "https://rd.io/i/QUWZfCJg-AI/")
+willie = Album.create(title: "Red Headed Stranger", band: "Willie Nelson", rdio_link: "https://rd.io/i/QUWZfCJclmA/")
+future_islands = Album.create(title: "Singles", band: "Future Islands", rdio_link: "https://rd.io/i/QUWZfCIfQkw/")
 
 round_five.albums << deleted_scenes
 round_five.albums << willie
@@ -162,6 +162,6 @@ tyler = User.create(email: "tyler@example.com", first_name: "Tyler", last_name: 
 
 round_four.users = [aaron, jacob, tyler]
 
-deleted_scenes.create_find(user_id: aaron.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/aaron-photo.jpg'))
-willie.create_find(user_id: jacob.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/jacob-photo.jpg'))
-future_islands.create_find(user_id: tyler.id, photo: File.open('/Users/mikejtodd/Sites/code-school/unfound-sounds/public/tyler-photo.jpg'))
+deleted_scenes.create_find(user_id: aaron.id)
+willie.create_find(user_id: jacob.id)
+future_islands.create_find(user_id: tyler.id)
