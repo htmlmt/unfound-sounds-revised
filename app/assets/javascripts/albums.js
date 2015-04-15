@@ -1,5 +1,7 @@
 $(document).on("page:load", function(){
-    showAlbumInfo();
+    if (Modernizr.mq('(min-width: 584px)')) {
+        showAlbumInfo();
+    }
     $(".text--prev").click(function(){
         $(this).parent().parent().parent().hide();
         $(this).parent().parent().parent().prev().css("display", "flex");
@@ -12,7 +14,9 @@ $(document).on("page:load", function(){
 });
 
 $(document).ready(function(){
-    showAlbumInfo();
+    if (Modernizr.mq('(min-width: 584px)')) {
+        showAlbumInfo();
+    }
     $(".text--prev").click(function(){
         $(this).parent().parent().parent().hide();
         $(this).parent().parent().parent().prev().css("display", "flex");
@@ -25,7 +29,9 @@ $(document).ready(function(){
 });
 
 function showAlbumInfo() {
-    $(".albums--album").on("click", toggleAlbumInfo);
+    if (Modernizr.mq('(min-width: 584px)')) {
+        $(".albums--album").on("click", toggleAlbumInfo);
+    }
     
     var showingAlbumInfo = false;
     var round = $(".body--round h3").text();

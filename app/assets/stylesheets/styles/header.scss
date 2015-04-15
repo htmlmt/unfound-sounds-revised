@@ -1,36 +1,29 @@
 .header {
-    @include flexbox();
-    @include flexbox-align-items(flex-end);
     max-width: 1000px;
     margin: 0 auto;
     padding: 2% 1%;
 }
 
 .header--logo {
-    width: 8%;
-    margin-right: 1rem;
+    display: none;
 }
 
 .header--title {
-    width: 60%;
+    width: 100%;
 }
 
 .header--title h1 {
-    margin: 0;
-}
-
-.header--title h1 a {
     font-family: "bebas-neue";
-    font-size: calc(100rem/16);
+    font-size: 4rem;
     color: $siteRed;
-    line-height: 0;
     margin: 0;
     padding: 0;
     vertical-align: middle;
+    text-align: center;
 }
 
 .header--navigation {
-    width: calc(100%/3);
+    width: 100%;
 }
 
 nav h3 {
@@ -51,4 +44,52 @@ nav h3 {
     width: calc(50% - 1rem);
     display: inline-block;
     margin: 0 .5rem;
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    .header {
+        @include flexbox();
+        @include flexbox-align-items(flex-end);
+    }
+    
+    .header--logo {
+        width: 7.4%;
+        margin-right: 1rem;
+        display: block;
+    }
+    
+    .header--title {
+        width: 60%;
+    }
+    
+    .header--title h1 {
+        font-size: 3.5rem;
+        line-height: .7;
+        text-align: left;
+    }
+    
+    .header--navigation {
+        width: calc(100%/3);
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    .header--logo {
+        width: 5.75%;
+    }
+    
+    .header--title h1 {
+        font-size: 4.5rem;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .header--logo {
+        width: 8%;
+    }
+    
+    .header--title h1 {
+        font-size: 6.25rem;
+        line-height: .7;
+    }
 }

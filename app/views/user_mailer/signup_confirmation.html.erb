@@ -1,7 +1,7 @@
 <p><%= @user.first_name %>,</p>
 <p>Welcome to <a href="http://unfoundsounds.com" target="_blank">Unfound Sounds.</a> You're in for a treat, and hopefully some great vinyl if you keep an eye on our monthly hints.</p>
 <p>I'm Michael, the treasure hunt organizer. Please let me know if you have any questions, or if there are any records you'd like me to hide in the coming summer months.</p>
-<p>The next treasure hunt will start on <%= Date.today.at_beginning_of_month.next_month.strftime("%A, %B %e") %> You've bought in for $0.99, and will be receiving hints via email every day the treasure hunt continues in your city.</p>
+<p>The next treasure hunt will start on <%= Date.today.at_beginning_of_month.next_month.strftime("%A, %B %e") %>. You've bought in for $1.99, and will be receiving hints via email every day the treasure hunt continues in your city.</p>
 <p>If you'd like to change your email frequency, update your profile, or refund your account, visit your profile page: <%= user_url(@user) %>.</p>
 <p>Have fun, and happy hunting!</p>
 <p>All the best,<br>

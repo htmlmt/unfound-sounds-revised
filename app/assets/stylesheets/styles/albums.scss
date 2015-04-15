@@ -1,3 +1,18 @@
+body {
+    @include flexbox();
+    @include flexbox-flex-wrap(wrap);
+}
+
+.body {
+    order: 3;
+    padding: 0 5%;
+}
+
+.body--round {
+    order: 2;
+    width: 100%;
+}
+
 .body {
     position: relative;
     max-width: 1100px;
@@ -6,24 +21,40 @@
 
 .body--albums {
     @include flexbox();
-    @include flexbox-justify-content(center);
-    @include flexbox-align-items(center);
+    @include flexbox-flex-wrap(wrap);
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .albums--album {
-    @include flexbox();
-    @include flexbox-flex-wrap(wrap);
-    @include flexbox-align-items(top);
-    width: calc(100%/3 - .5rem);
-    margin: 0 .25rem;
+    width: 100%;
+    margin: 0 .25rem 2rem .25rem;
     transition-duration: 1s;
     position: relative;
     z-index: 100;
     @include drop-shadow(5px, 5px, 5px, 0.1);
     background: #fff;
+}
+
+.album--content:nth-of-type(1) {
+    order: 2;
+}
+
+.albums--album:nth-of-type(2) {
+    order: 3;
+}
+
+.album--content:nth-of-type(2) {
+    order: 4;
+}
+
+.albums--album:nth-of-type(3) {
+    order: 5;
+}
+
+.album--content:nth-of-type(3) {
+    order: 6;
 }
 
 .albums--album.top {
@@ -61,25 +92,19 @@
     margin: 0;
 }
 
-.album--content {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: calc((100%/3 * 2) - 4rem);
-    margin-left: 2rem;
-    display: none;
-}
-
 .body--round {
     text-align: center;
     margin-top: 3%;
 }
 
 .body--round h3 {
-    font-family: "clavo";
+    font-family: "proxima-nova";
     font-size: calc(19rem/16);
     text-transform: uppercase;
     color: $siteRed;
+    line-height: 1.4;
+    font-weight: bold;
+    padding: 0 5%;
 }
 
 .content--title h1 {
@@ -224,4 +249,41 @@
     top: 50%;
     @include transform-translate(0, -50%);
     right: 0;
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    body {
+        @include flexbox();
+        @include flexbox-flex-wrap(wrap);
+    }
+
+    .body {
+        order: 2;
+    }
+
+    .body--round {
+        order: 3;
+    }
+    
+    .body--albums {
+        @include flexbox-justify-content(center);
+        @include flexbox-align-items(center);
+    }
+    
+    .albums--album {
+        @include flexbox();
+        @include flexbox-flex-wrap(wrap);
+        @include flexbox-align-items(top);
+        width: calc(100%/3 - .5rem);
+        margin: 0 .25rem;
+    }
+    
+    .album--content {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: calc((100%/3 * 2) - 4rem);
+        margin-left: 2rem;
+        display: none;
+    }
 }

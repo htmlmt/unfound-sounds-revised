@@ -89,7 +89,7 @@
 </main>
 <div class="body--round">
     <% if @round != nil %>
-        <h3>Vinyl Treasure Hunt #<%= @round.id %>: <%= @round.month.strftime("%B 1-8, %Y") %></h3>
+        <h3>Vinyl Treasure Hunt, Round <%= @round.id %>:<br> <%= @round.month.strftime("%B 1-8, %Y") %></h3>
     <% else %>
         <h3>Please wait until the first treasure hunt is scheduled.</h3>
     <% end %>
