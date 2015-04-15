@@ -147,14 +147,16 @@
 }
 
 .photo--background {
-    width: 60%;
+    width: 37.5%;
     padding-top: 37.5%;
+    background-position: 50%, 50%; 
     background-size: cover;
 }
 
 .photo--text {
-    width: 40%;
+    width: 62.5%;
     position: relative;
+    padding-left: 1em;
 }
 
 .photo--text h5 {

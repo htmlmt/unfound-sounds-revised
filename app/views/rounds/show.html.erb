@@ -30,10 +30,8 @@
                                 </h4>
                             </div>
                             <div class="content--photo">
-                                <a href="<%= user_path(album.find.user) %>">
-                                    <div class="photo--background" style="background-image: url(<%= album.find.photo %>)">
-                                    </div>
-                                </a>
+                                <div class="photo--background" style="background-image: url(<%= album.find.photo %>)">
+                                </div>
                                 <div class="photo--text">
                                     <%= place.description %>
                                 </div>
@@ -81,6 +79,8 @@
                 </a>
             </div>
         <% end %>
+    <% else %>
+        <img src="" alt="Next vinyl treasure hunt coming soon"/>
     <% end %>
 </main>
 <div class="body--round">

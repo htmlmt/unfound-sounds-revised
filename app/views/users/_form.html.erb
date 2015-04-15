@@ -46,7 +46,7 @@
             Stripe.setPublishableKey("<%= ENV["PUBLISHABLE_KEY"] %>");
         </script>
             
-        <h3>Want to see hints? Find your next vinyl for only $2</h3>
+        <h3>$0.99 for one round</h3>
         
         <%= label_tag "Card Number", nil, required: true %>
         <div class="control-group">
@@ -64,7 +64,7 @@
         <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, data: {stripe: "exp-month"}, class: "span2" %>
         <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, data: {stripe: "exp-year"}, class: "span1" %>
         <div class="actions">
-            <%= f.submit "Submit Payment" %>
+            <%= f.submit "Sign up" %>
         </div>
     <% end %>
 </main>
