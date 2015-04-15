@@ -10,8 +10,6 @@ class RoundsController < ApplicationController
   # GET /rounds/1
   # GET /rounds/1.json
   def show
-    user_location = request.location
-    @user_lat_long = user_location.latitude + user_location.longitude
   end
 
   # GET /rounds/new
