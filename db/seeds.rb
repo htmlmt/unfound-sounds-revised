@@ -142,7 +142,7 @@ round_five.albums << deleted_scenes
 round_five.albums << willie
 round_five.albums << future_islands
 
-lemonly = Place.create(name: "Lemonly", description: "Lemonly specializes in interactive, static and video infographics, data visualization, and animation. They'll help turn your lemons into lemonade.", link: "https://www.facebook.com/thinklemonly", link_text: "follow Lemonly on Facebook", address: "431 Phillips Ave.", city: "Sioux Falls", state: "SD")
+lemonly = Place.create(name: "Lemonly", description: "Lemonly specializes in interactive, static and video infographics, data visualization, and animation. They'll help turn your lemons into lemonade.", link: "https://www.facebook.com/thinklemonly", link_text: "follow Lemonly on Facebook", address: "431 N. Phillips Ave. #440", city: "Sioux Falls", state: "SD")
 
 deleted_scenes.places << lemonly
 

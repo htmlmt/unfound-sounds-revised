@@ -10,6 +10,14 @@ class RoundsController < ApplicationController
   # GET /rounds/1
   # GET /rounds/1.json
   def show
+    @gmaps_links = []
+    @round.albums.each do |album| 
+      album.places.each do |place|
+        gmaps_link = place.address + ' ' + place.city + ' ' + place.state
+        gmaps_link.gsub!(' ', '+')
+        @gmaps_links << gmaps_link
+      end
+    end
   end
 
   # GET /rounds/new

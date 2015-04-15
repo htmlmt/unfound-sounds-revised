@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   resources :sessions
   
   resources :charges
+  
+  get ":username" => "users#show", :as => "profile"
 end

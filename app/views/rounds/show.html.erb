@@ -15,7 +15,7 @@
                     </div>
                 </section>
             <% end %>
-            <% @round.albums.each do |album| %>
+            <% @round.albums.each_with_index do |album, index| %>
                 <div class="album--content">
                     <header class="content--title">
                         <h1><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></h1>
@@ -33,7 +33,11 @@
                                 <div class="photo--background" style="background-image: url(<%= album.find.photo %>)">
                                 </div>
                                 <div class="photo--text">
-                                    <%= place.description %>
+                                    <p><%= place.description %></p>
+                                    <p>Visit <%= place.name %>: 
+                                    <a href="https://www.google.com/maps/place/<%= @gmaps_links[index] %>" target="_blank">
+                                        <%= place.address %> in <%= place.city %>
+                                    </a></p>
                                 </div>
                             </div>
                         <% end %>
