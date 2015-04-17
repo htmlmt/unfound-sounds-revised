@@ -67,7 +67,9 @@
 <% if flash[:alert] %>
     <p id="flash_alert" class="messages alter"><%= flash[:alert] %></p>
 <% end %>
-<%= yield %>
+<div class="wrapper">
+    <%= yield %>
+</div>
 
 </body>
 </html>
