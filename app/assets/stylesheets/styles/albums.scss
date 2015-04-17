@@ -11,6 +11,7 @@ body {
 .body--round {
     order: 2;
     width: 100%;
+    transition-duration: .5s;
 }
 
 .body {
@@ -25,6 +26,7 @@ body {
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
+    transition-duration: .5s;
 }
 
 .albums--album {

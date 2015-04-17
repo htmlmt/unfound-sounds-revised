@@ -48,6 +48,14 @@ $(window).on('popstate', function () {
     $.get(document.location.href)
 });
 
+$('.body--next').on("click", function(){
+    $(this).addClass("next");
+});
+
+$('.body--prev').on("click", function(){
+    $(this).addClass("prev");
+});
+
 function showAlbumInfo() {
     if (Modernizr.mq('(min-width: 584px)')) {
         $(".albums--album").on("click", toggleAlbumInfo);
