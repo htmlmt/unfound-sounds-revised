@@ -81,7 +81,26 @@ class RoundsController < ApplicationController
       if params[:id]
         @round = Round.find(params[:id])
       else
-        @round = Round.where("month < ?", Date.today).order("month DESC").first
+        current_round_finished = false
+        finds = []
+        upcoming_round = Round.where(month: Date.today.beginning_of_month + 1.month).first
+        current_round = Round.where("month <= ?", Date.today).order("month DESC").first
+        
+        current_round.albums.each do |album|
+          if album.find.user != nil
+            finds << album
+          end
+        end
+        
+        if finds.count == 3
+          current_round_finished = true
+        end
+        
+        if upcoming_round != nil && current_round_finished == true
+          @round = upcoming_round
+        else
+          @round = current_round
+        end
       end
     end
 

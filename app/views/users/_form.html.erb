@@ -24,7 +24,7 @@
             <%= f.text_field :last_name %>
         </div>
         <div class="register--field">
-            <%= f.label :username %><br>
+            <%= f.label "Username" %><br>
             <%= f.text_field :username %>
         </div>
         <div class="register--field">
@@ -32,12 +32,12 @@
             <%= f.text_field :email %>
         </div>
         <div class="register--field">
-            <%= f.label :password %><br />
-            <%= f.password_field :password %>
+            <%= f.label :city %><br>
+            <%= f.select :city, [["Lincoln", "Lincoln"], ["Omaha", "Omaha"], ["Sioux Falls", "Sioux Falls"]] %>
         </div>
         <div class="register--field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation %>
+            <%= f.label :password %><br />
+            <%= f.password_field :password %>
         </div>
         
         <div id="flash-messages"></div>
@@ -46,7 +46,7 @@
             Stripe.setPublishableKey("<%= ENV["PUBLISHABLE_KEY"] %>");
         </script>
             
-        <h3>$0.99 for one round</h3>
+        <h3>$1.99 for one round</h3>
         
         <%= label_tag "Card Number", nil, required: true %>
         <div class="control-group">

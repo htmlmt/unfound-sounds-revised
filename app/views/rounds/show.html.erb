@@ -1,8 +1,8 @@
 <main class="body">
     <% if @round != nil %>
-        <% if Round.where(month: @round.month + 1.month) != [] %>
+        <% if Round.where("month > ?", @round.month).order("month DESC") != [] %>
             <div class="body--prev">
-                <a href="/rounds/<%= Round.where(month: @round.month + 1.month).first.id %>">
+                <a href="/rounds/<%= Round.where("month > ?", @round.month).order("month ASC").first.id %>">
                     <%= image_tag "prev.png" %>
                 </a>
             </div>
@@ -10,9 +10,11 @@
         <div class="body--albums">
             <% @round.albums.each do |album| %>
                 <section class="albums--album">
-                    <div class="album--image">
-                        <%= image_tag(album.cover) %>
-                    </div>
+                    <%= link_to album_path(album), class: "album--link" do |link| %>
+                        <div class="album--image">
+                            <%= image_tag(album.cover) %>
+                        </div>
+                    <% end %>
                 </section>
             <% end %>
             <% @round.albums.each_with_index do |album, index| %>
@@ -43,31 +45,47 @@
                         <% end %>
                     <% else %>
                         <% album.places.each do |place| %>
-                            <div class="content--description">
-                                <h4>
-                                    <em>hidden somewhere in <%= place.city %></em>
-                                </h4>
-                            </div>
-                            <% album.hints.each_with_index do |hint, index| %>
-                                <div class="content--photo">
-                                    <div class="photo--text">
-                                        <h5>hint #<%= index + 1 %></h5>
-                                        <p><%= hint.description %></p>
-                                        <div class="next-prev--container">
-                                            <p class="text--hints">
-                                                see more hints
-                                            </p>
-                                            <% if index == 0 %>
-                                                <div class="text--next first">▶</div>
-                                            <% elsif index > 0 && index + 1 < album.hints.count && Date.today.day >= album.hints.count %>
-                                                <div class="text--prev">◀</div>
-                                                <div class="text--next">▶</div>
-                                            <% else %>
-                                                <div class="text--prev">◀</div>
+                            <% if place.city != "" %>
+                                <div class="content--description">
+                                    <h4>
+                                        <em>
+                                            <% if @round.month != Date.today.beginning_of_month %>
+                                                will be
                                             <% end %>
+                                            hidden somewhere in <%= place.city %></em>
+                                    </h4>
+                                </div>
+                            <% end %>
+                            <% if Date.today.beginning_of_month == @round.month %>
+                                <% album.hints.each_with_index do |hint, index| %>
+                                    <div class="content--photo">
+                                        <div class="photo--text">
+                                            <h5>hint #<%= index + 1 %></h5>
+                                            <p><%= hint.description %></p>
+                                            <div class="next-prev--container">
+                                                <p class="text--hints">
+                                                    see more hints
+                                                </p>
+                                                <% if index == 0 %>
+                                                    <div class="text--next first">▶</div>
+                                                <% elsif index > 0 && index + 1 < album.hints.count && Date.today.day >= album.hints.count %>
+                                                    <div class="text--prev">◀</div>
+                                                    <div class="text--next">▶</div>
+                                                <% else %>
+                                                    <div class="text--prev">◀</div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="photo--background" style="background-image: url(<%= hint.photo %>)">
                                         </div>
                                     </div>
-                                    <div class="photo--background" style="background-image: url(<%= hint.photo %>)">
+                                <% end %>
+                            <% else %>
+                                <div class="content--photo">
+                                    <div class="photo--text">
+                                        <a href="<%= album.link %>" target="_blank"><%= album.link_text %></a>
+                                    </div>
+                                    <div class="photo--background">
                                     </div>
                                 </div>
                             <% end %>
@@ -76,9 +94,9 @@
                 </div>
             <% end %>
         </div>
-        <% if Round.where(month: @round.month - 1.month) != [] %>
+        <% if Round.where("month < ?", @round.month).order("month DESC") != [] %>
             <div class="body--next">
-                <a href="/rounds/<%= Round.where(month: @round.month - 1.month).first.id %>">
+                <a href="/rounds/<%= Round.where("month < ?", @round.month).order("month DESC").first.id %>">
                     <%= image_tag "next.png" %>
                 </a>
             </div>
@@ -89,7 +107,7 @@
 </main>
 <div class="body--round">
     <% if @round != nil %>
-        <h3>Vinyl Treasure Hunt, Round <%= @round.id %>:<br> <%= @round.month.strftime("%B 1-8, %Y") %></h3>
+        <h3>Vinyl Treasure Hunt, Round <%= @round.id %>: <%= @round.month.strftime("%B 1-8, %Y") %></h3>
     <% else %>
         <h3>Please wait until the first treasure hunt is scheduled.</h3>
     <% end %>

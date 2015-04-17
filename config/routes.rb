@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   
   resources :charges
   
-  get ":username" => "users#show", :as => "profile"
+  get ":id" => "users#show", :as => "profile"
 end

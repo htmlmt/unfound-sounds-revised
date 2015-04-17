@@ -33,11 +33,20 @@ function showAlbumInfo() {
         $(".albums--album").on("click", toggleAlbumInfo);
     }
     
+    $(window).bind("popstate", function() {
+        toggleAlbumInfo();
+    });
+    
     var showingAlbumInfo = false;
+    var roundLink;
     var round = $(".body--round h3").text();
     
-    function toggleAlbumInfo() {
+    function toggleAlbumInfo(e) {
+        e.preventDefault();
         if (showingAlbumInfo === false) {
+            link = $(this).children(".album--link").attr('href');
+            roundLink = window.location.href;
+            history.pushState(null, $(this).children(".album--slug"), link)
             $(this).addClass("top");
             if ($(this).index() === 0) {
                 $(".albums--album:nth-of-type(2)").addClass('move-once');
@@ -61,6 +70,8 @@ function showAlbumInfo() {
             
             showingAlbumInfo = true;
         } else {
+            link = $(this).children(".album--link").attr('href');
+            history.pushState(null, "", roundLink);
             $(".album--content").fadeOut(500);
             $(".albums--album").removeClass("move-once");
             $(".albums--album").removeClass("move-twice");

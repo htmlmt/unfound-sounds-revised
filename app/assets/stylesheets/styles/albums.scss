@@ -251,10 +251,13 @@ body {
     right: 0;
 }
 
+.photo--text a {
+    text-decoration: underline;
+}
+
 @media only screen and (min-width: $smallTabletBreakpoint) {
     body {
-        @include flexbox();
-        @include flexbox-flex-wrap(wrap);
+        display: block;
     }
 
     .body {
