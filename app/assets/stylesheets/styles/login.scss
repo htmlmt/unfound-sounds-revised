@@ -37,10 +37,6 @@ input, textarea {
     -webkit-appearance: none;
     outline: none;
 }
-
-select {
-    -webkit-appearance:none;
-}
  
 input:focus, textarea:focus {
     box-shadow: 0 0 5px $siteGreen;
@@ -53,7 +49,7 @@ input:focus, textarea:focus {
 }
 
 .login {
-    max-width: 975px;
+    max-width: 1125px;
     margin: 0 auto;
     padding: 0 5% 2rem 5%;
     @include clearfix();
