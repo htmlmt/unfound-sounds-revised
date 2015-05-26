@@ -3,11 +3,11 @@
     <% if @current_round == true %>
         <main class="body--main current-round">
             <h1>THE VINYL TREASURE HUNT IS ON</h1>
-            <h3><em>It started <%= Date.today.beginning_of_month.strftime("%A, %B %e") %></em></h3>
+            <p>It started <%= Date.today.beginning_of_month.strftime("%A, %B %e") %>. Sign up or login to see hints.</p>
     <% else %>
         <main class="body--main upcoming-round">
             <h1>THE NEXT VINYL TREASURE HUNT AWAITS YOU</h1>
-            <h3><em>Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>,<br> these albums will be hidden in local businesses.</em></h3>
+            <p>Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local businesses.</p>
     <% end %>
         <div class="body--albums">
             <% @round.albums.each do |album| %>
