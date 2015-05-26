@@ -99,10 +99,6 @@ body {
     background-color: $siteRed;
 }
 
-.albums--album:hover .album--signup {
-    opacity: 1;
-}
-
 .albums--album.top {
     z-index: 300;
 }
@@ -341,19 +337,10 @@ body {
     .albums--album:nth-of-type(2) {
         margin: 0 2%;
     }
-    
-//    .album--info {
-//        border-bottom: 10px solid $siteRed;
-//        opacity: 0;
-//        z-index: 100;
-//        position: absolute;
-//        top: 0;
-//        bottom: 0;
-//        background-color: rgba(255, 255, 255, .75);
-//        left: 0;
-//        transition-duration: .5s;
-//        margin: 0;
-//    }
+
+    .albums--album:hover .album--signup {
+        opacity: 1;
+    }
     
     .albums--album {
         @include flexbox();

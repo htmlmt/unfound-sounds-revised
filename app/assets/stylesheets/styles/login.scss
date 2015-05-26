@@ -30,6 +30,16 @@ input, textarea {
     -o-transition: all 0.30s ease-in-out;
     outline: none;
     border: 1px solid #DDDDDD;
+    width: 100%;
+    border-radius: 0;
+    background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0,0%,100%,0)), to(hsla(0,0%,100%,0)));
+    background-image:-webkit-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,0));
+    -webkit-appearance: none;
+    outline: none;
+}
+
+select {
+    -webkit-appearance:none;
 }
  
 input:focus, textarea:focus {
@@ -39,30 +49,25 @@ input:focus, textarea:focus {
 
 .login--container {
     background-color: $white;
+    width: 100%;
 }
 
 .login {
     max-width: 975px;
     margin: 0 auto;
-    padding-bottom: 2rem;
+    padding: 0 5% 2rem 5%;
     @include clearfix();
-}
-
-.login .register--field {
-    width: 50%;
-    float: left;
-}
-
-.login .register--field:nth-of-type(odd) {
-    padding-right: .5em;
-}
-
-.login .register--field:nth-of-type(even) {
-    padding-left: .5em;
+    width: 100%;
 }
 
 .login--submit {
     margin-top: 1em;
+}
+
+.actions input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0;
 }
 
 .alert .close, .alert #flash_alert {
@@ -72,4 +77,19 @@ input:focus, textarea:focus {
 
 .alert #flash_alert {
     margin-left: .5em;
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    .login .register--field {
+        width: 50%;
+        float: left;
+    }
+    
+    .login .register--field:nth-of-type(odd) {
+        padding-right: .5em;
+    }
+
+    .login .register--field:nth-of-type(even) {
+        padding-left: .5em;
+    }
 }
