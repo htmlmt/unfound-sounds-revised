@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'password_resets/update'
   
   get 'rounds/signup'
+  
+  get 'rounds/:id/participants' => "rounds#participants", :as => "participants"
 
   resources :finds
 

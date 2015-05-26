@@ -1,5 +1,5 @@
 class RoundsController < ApplicationController
-  before_action :set_round, only: [:index, :signup, :show, :edit, :update, :destroy]
+  before_action :set_round, only: [:index, :signup, :participants, :show, :edit, :update, :destroy]
 
   # GET /rounds
   # GET /rounds.json
@@ -20,6 +20,10 @@ class RoundsController < ApplicationController
         format.json { render json: @round.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def participants
+    @users = @round.users
   end
   
   # GET /rounds/1

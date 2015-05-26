@@ -1,0 +1,10 @@
+<h1><% @round.month %></h1>
+<% @users.each do |user| %>
+<ul>
+    <li>
+        <p><%= user.first_name %> <%= user.last_name %></p>
+        <p><%= user.email %></p>
+        <p><%= user.city %></p>
+    </li>
+</ul>
+<% end %>
