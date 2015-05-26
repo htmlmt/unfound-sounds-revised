@@ -1,4 +1,6 @@
+<div class="login--container">
 <main class="login">
+    <p><%= flash.notice %></p>
     <%= form_for @user, html: { class: "body--register" } do |f| %>
         <% if @user.errors.any? %>
             <div id="error_explanation">
@@ -46,7 +48,7 @@
             Stripe.setPublishableKey("<%= ENV["PUBLISHABLE_KEY"] %>");
         </script>
             
-        <h3>Pay whatever you want</h3>
+        <h3>Pay what you want</h3>
         <%= label_tag "Amount" %>
         <div class="control-group">
             <div class="controls">
@@ -73,6 +75,7 @@
         </div>
     <% end %>
 </main>
+</div>
 <script>
 if($("#card-number").val() != "") {
     console.log('here');

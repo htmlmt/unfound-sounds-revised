@@ -6,28 +6,64 @@
             <p>It started <%= Date.today.beginning_of_month.strftime("%A, %B %e") %>. Sign up or login to see hints.</p>
     <% else %>
         <main class="body--main upcoming-round">
-            <h1>THE NEXT VINYL TREASURE HUNT AWAITS YOU</h1>
-            <p>Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local businesses.</p>
+            <h1>GET READY FOR THE NEXT VINYL TREASURE HUNT</h1>
+            <p>Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local establishments we love.</p>
     <% end %>
-        <div class="body--albums">
-            <% @round.albums.each do |album| %>
-                <section class="albums--album">
-                    <%= link_to album_path(album), class: "album--link" do |link| %>
+        <% if @current_round == true %>
+            <div class="body--albums">
+                <% @round.albums.each do |album| %>
+                    <section class="albums--album">
+                        <%= link_to album_path(album), class: "album--link" do |link| %>
+                            <div class="album--image">
+                                <%= image_tag(album.cover) %>
+                            </div>
+                            <div class="album--info">
+                                <p><%= "\"#{album.title}\" by #{album.band}" %></p>
+                                <% album.places.each do |place| %>
+                                    <em>hidden in <%= place.city %></em>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </section>
+                <% end %>
+            </div>
+        <% else %>
+            <div class="body--albums">
+                <% @round.albums.each do |album| %>
+                    <section class="albums--album">
                         <div class="album--image">
                             <%= image_tag(album.cover) %>
                         </div>
                         <div class="album--info">
-                            <p><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></p>
+                            <p><%= "\"#{album.title}\" by #{album.band}" %></p>
                             <% album.places.each do |place| %>
                                 <em>hidden in <%= place.city %></em>
                             <% end %>
                         </div>
-                    <% end %>
-                </section>
-            <% end %>
-        </div>
+                        <% @round.users.each do |user| %>
+                            <% if user == current_user %>
+                                <% @joined = true %>
+                            <% else %>
+                                <% @joined = false %>
+                            <% end %>
+                        <% end %>
+                        <% if @joined == true %>
+                            <div class="album--signup">
+                                <h1>You've joined the hunt.<br> Please return <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %> for hints.</h1>
+                            </div>
+                        <% else %>
+                            <a href="rounds/signup">
+                                <div class="album--signup">
+                                    <h1>To receive hints,<br> join the hunt</h1>
+                                </div>
+                            </a>
+                        <% end %>
+                    </section>
+                <% end %>
+            </div>
+        <% end %>
     </main>
-    <header class="body--found-header">
+    <!-- <header class="body--found-header">
         <h1>FOUND SOUNDS</h1>
     </header>
     <% @rounds.each_with_index do |round, index| %>
@@ -42,16 +78,15 @@
         <% if round != nil %>
             <div class="body--albums">
                 <% round.albums.each do |album| %>
-                    <section class="albums--album">
+                    <section class="albums--album moving-album">
                         <%= link_to album_path(album), class: "album--link" do |link| %>
                             <div class="album--image">
                                 <%= image_tag(album.cover) %>
                             </div>
                             <div class="album--info">
-                                <p><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></p>
+                                <p><%= "\"#{album.title}\" by #{album.band}" %></p>
                                 <% album.places.each do |place| %>
-                                    <em>found at <%= link_to place.name, place.link %> by 
-                                    <%= link_to "#{album.find.user.first_name} #{album.find.user.last_name}", user_path(album.find.user) %>
+                                    <em>found at <%= place.name %> by  <%= "#{album.find.user.first_name} #{album.find.user.last_name}" %>
                                     </em>
                                 <% end %>
                             </div>
@@ -62,5 +97,5 @@
         <% else %>
             <img src="" alt="Next vinyl treasure hunt coming soon"/>
         <% end %>
-    <% end %>
+    <% end %> -->
 </div>

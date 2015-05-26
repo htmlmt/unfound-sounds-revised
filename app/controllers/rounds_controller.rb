@@ -1,11 +1,25 @@
 class RoundsController < ApplicationController
-  before_action :set_round, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_round, only: [:index, :signup, :show, :edit, :update, :destroy]
 
   # GET /rounds
   # GET /rounds.json
   def index
     @rounds = Round.all.order("month DESC")
     @rounds = @rounds - [@round]
+  end
+  
+  def signup
+    respond_to do |format|
+      if current_user
+        @round.users << current_user
+        format.html { redirect_to :root }
+        format.json { render :show, status: :created, location: @round }
+      else
+        flash[:notice] = 'Please signup or login before joining a hunt'
+        format.html { redirect_to :signup }
+        format.json { render json: @round.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   # GET /rounds/1

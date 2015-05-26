@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'password_resets/create'
+
+  get 'password_resets/edit'
+
+  get 'password_resets/update'
+  
+  get 'rounds/signup'
+
   resources :finds
 
   resources :features
@@ -14,6 +22,8 @@ Rails.application.routes.draw do
   resources :places
 
   resources :rounds
+  
+  resources :password_resets
   
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

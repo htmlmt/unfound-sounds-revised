@@ -66,7 +66,7 @@ class UsersController < ApplicationController
         end
         @round.users << @user
         session[:user_id] = @user.id
-        format.html { redirect_to @user }
+        format.html { redirect_to :root }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

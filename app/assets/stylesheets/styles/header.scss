@@ -1,7 +1,12 @@
 .header {
+    padding: 2% 1%;
+    background-color: $white;
+    width: 100%;
+}
+
+.header--container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2% 1%;
 }
 
 .header--logo {
@@ -48,11 +53,10 @@ nav h3 {
     width: calc(50% - 1rem);
     display: inline-block;
     margin: 0 .5rem;
-    border-bottom: 5px solid $siteBlack;
 }
 
 @media only screen and (min-width: $smallTabletBreakpoint) {
-    .header {
+    .header--container {
         @include flexbox();
         @include flexbox-justify-content(center);
         @include flexbox-align-items(flex-end);

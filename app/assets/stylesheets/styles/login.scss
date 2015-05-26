@@ -9,8 +9,9 @@ button, .button, input[type="button"], input[type="submit"], input[type="reset"]
     box-shadow: none;
     border: none;
     color: #ffffff;
-    font-family: "proxima-nova", sans-serif;
-    font-size: 0.875em;
+    font-family: 'bebas-neue';
+    font-family: "bebas-neue";
+    font-size: calc(30rem/16);
     font-weight: 600;
     cursor: pointer;
     text-transform: uppercase;
@@ -34,6 +35,10 @@ input, textarea {
 input:focus, textarea:focus {
     box-shadow: 0 0 5px $siteGreen;
     border: 1px solid $siteGreen;
+}
+
+.login--container {
+    background-color: $white;
 }
 
 .login {

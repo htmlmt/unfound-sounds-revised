@@ -42,27 +42,29 @@
 </head>
 <body>
 <header class="header">
-    <div class="header--logo">
-        <%= link_to image_tag("unfound-sounds-logo.png"), "/", remote: true %>
+    <div class="header--container">
+        <div class="header--logo">
+            <%= link_to image_tag("unfound-sounds-logo.png"), "/", remote: true %>
+        </div>
+        <div class="header--title">
+            <a href="/"><h1>Unfound Sounds</h1></a>
+        </div>
+        <nav class="header--navigation">
+            <% if current_user %>
+                <a href="/logout"><div class="navigation--button">
+                    <h3>logout</h3>
+                </div></a><a href="/users/<%= current_user.username %>"><div class="navigation--button">
+                    <h3>profile</h3>
+                </div></a>
+            <% else %>
+                <a href="/login"><div class="navigation--button">
+                    <h3>login</h3>
+                </div></a><a href="/signup" data-no-turbolink="true"><div class="navigation--button">
+                    <h3>signup</h3>
+                </div></a>
+            <% end %>
+        </nav>
     </div>
-    <div class="header--title">
-        <a href="/"><h1>Unfound Sounds</h1></a>
-    </div>
-    <nav class="header--navigation">
-        <% if current_user %>
-            <a href="/logout"><div class="navigation--button">
-                <h3>logout</h3>
-            </div></a><a href="/users/<%= current_user.username %>"><div class="navigation--button">
-                <h3>profile</h3>
-            </div></a>
-        <% else %>
-            <a href="/login"><div class="navigation--button">
-                <h3>login</h3>
-            </div></a><a href="/signup" data-no-turbolink="true"><div class="navigation--button">
-                <h3>signup</h3>
-            </div></a>
-        <% end %>
-    </nav>
 </header>
 <% if flash[:alert] %>
     <p id="flash_alert" class="messages alter"><%= flash[:alert] %></p>
