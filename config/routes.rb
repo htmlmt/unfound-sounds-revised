@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :features
 
-  root 'rounds#show'
+  root 'rounds#index'
   
   resources :hints
 

@@ -1,12 +1,13 @@
 class RoundsController < ApplicationController
-  before_action :set_round, only: [:show, :edit, :update, :destroy]
+  before_action :set_round, only: [:index, :show, :edit, :update, :destroy]
 
   # GET /rounds
   # GET /rounds.json
   def index
-    @rounds = Round.all
+    @rounds = Round.all.order("month DESC")
+    @rounds = @rounds - [@round]
   end
-
+  
   # GET /rounds/1
   # GET /rounds/1.json
   def show
@@ -83,12 +84,14 @@ class RoundsController < ApplicationController
       else
         current_round_finished = false
         finds = []
-        upcoming_round = Round.where(month: Date.today.beginning_of_month + 1.month).first
-        current_round = Round.where("month <= ?", Date.today).order("month DESC").first
+        upcoming_round = Round.where(month: (Date.today.beginning_of_month + 1.month)).first
+        current_round = Round.where(month: Date.today.beginning_of_month).first
         
-        current_round.albums.each do |album|
-          if album.find.user != nil
-            finds << album
+        if current_round != nil
+          current_round.albums.each do |album|
+            if album.find != nil
+              finds << album
+            end
           end
         end
         
@@ -96,10 +99,12 @@ class RoundsController < ApplicationController
           current_round_finished = true
         end
         
-        if upcoming_round != nil && current_round_finished == true
+        if upcoming_round != nil && current_round_finished == false
           @round = upcoming_round
+          @current_round = false
         else
           @round = current_round
+          @current_round = true
         end
       end
     end

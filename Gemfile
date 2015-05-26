@@ -66,3 +66,7 @@ gem 'stripe'
 gem 'geokit'
 
 gem 'geocoder'
+
+gem 'delayed_job_active_record'
+
+gem 'timecop'

@@ -1,8 +1,26 @@
 <p><%= @user.first_name %>,</p>
-<p>Welcome to <a href="http://unfoundsounds.com" target="_blank">Unfound Sounds.</a> You're in for a treat, and hopefully some great vinyl if you keep an eye on our monthly hints.</p>
+<p>Welcome to <a href="http://unfoundsounds.com" target="_blank">Unfound Sounds.</a> You're in for a treat, and hopefully some great vinyl if you keep an eye on our hints.</p>
 <p>I'm Michael, the treasure hunt organizer. Please let me know if you have any questions, or if there are any records you'd like me to hide in the coming summer months.</p>
-<p>The next treasure hunt will start on <%= Date.today.at_beginning_of_month.next_month.strftime("%A, %B %e") %>. You've bought in for $1.99, and will be receiving hints via email every day the treasure hunt continues in your city.</p>
-<p>If you'd like to change your email frequency, update your profile, or refund your account, visit your profile page: <%= user_url(@user) %>.</p>
+<% @albums = Album.all %>
+<% city_albums = [] %>
+<% album_found = false %>
+<% while album_found == false %>
+    <% @albums.each do |album| %>
+        <% album.places.each do |place| %>
+            <% if place.city == @user.city %>
+                <% city_albums << album %>
+                <% album_found = true %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+<% binding.pry %>
+<% if city_albums != [] %>
+    <p>The next treasure hunt in <% @user.city %> will start on <%= Date.today.at_beginning_of_month.next_month.strftime("%A, %B %e") %>. You will receive hints once a day while a treasure hunt continues. Usually, the hunt lasts only a few days, so act fast when you know where the vinyl is hidden.</p>
+<% else %>
+    <p>The treasure hunt in your city is in progress. It started on <%= Date.today.at_beginning_of_month.strftime("%A, %B %e") %>. See the hints posted so far for <%= link_to("#{city_albums.last.title} by #{city_albums.last.band}", album_path(city_albums.last)) %>.</p>
+<% end %>
+<p>If you'd like to change your email frequency or update your profile, visit your profile page: <%= user_url(@user) %>.</p>
 <p>Have fun, and happy hunting!</p>
 <p>All the best,<br>
 Michael</p>

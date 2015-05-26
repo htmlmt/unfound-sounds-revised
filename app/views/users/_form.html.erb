@@ -46,21 +46,26 @@
             Stripe.setPublishableKey("<%= ENV["PUBLISHABLE_KEY"] %>");
         </script>
             
-        <h3>$1.99 for one round</h3>
-        
-        <%= label_tag "Card Number", nil, required: true %>
+        <h3>Pay whatever you want</h3>
+        <%= label_tag "Amount" %>
         <div class="control-group">
             <div class="controls">
-                <%= text_field_tag :card_number, nil, class: "input-block-level", data: {stripe: "number"} %>
+                <%= text_field_tag :amount %>
             </div>
         </div>
-        <%= label_tag "Card Verification", nil, required: true %>
+        <%= label_tag "Card Number", nil %>
+        <div class="control-group">
+            <div class="controls">
+                <%= text_field_tag :card_number, nil, class: "input-block-level", id: "card-number", data: {stripe: "number"} %>
+            </div>
+        </div>
+        <%= label_tag "Card Verification", nil %>
         <div class="control-group">
             <div class="controls">
               <%= text_field_tag :card_verification, nil, class: "input-block-level", data: {stripe: "cvv"} %>
             </div>
         </div>
-        <%= label_tag "Card Expires", nil, required: true %>
+        <%= label_tag "Card Expires", nil %>
         <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, data: {stripe: "exp-month"}, class: "span2" %>
         <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, data: {stripe: "exp-year"}, class: "span1" %>
         <div class="actions">
@@ -69,6 +74,8 @@
     <% end %>
 </main>
 <script>
+if($("#card-number").val() != "") {
+    console.log('here');
     var show_error, stripeResponseHandler;
     $("#new_user").submit(function (event) {
         var $form;
@@ -101,4 +108,5 @@
         $('.alert').delay(5000).fadeOut(3000);
         return false;
     };
+}
 </script>

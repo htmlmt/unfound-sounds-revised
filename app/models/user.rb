@@ -17,13 +17,4 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
-  
-  def process_payment
-    customer = Stripe::Customer.create email: email, source: card_token
-    Stripe::Charge.create customer: customer.id,
-                          amount: 199,
-                          description: "Vinyl Treasure Hunt",
-                          currency: 'usd'
-
-  end
 end

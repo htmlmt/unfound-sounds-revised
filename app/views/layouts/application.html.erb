@@ -33,7 +33,7 @@
   <meta name="twitter:image" content="">
   
   <!-- ICONS -->
-  <link href="images/favicon.ico" rel="shortcut icon">
+  <link href="<%= image_url("favicon.ico") %>" rel="shortcut icon">
   <link href=""         rel="apple-touch-icon" />
   <link href=""   rel="apple-touch-icon" sizes="76x76" />
   <link href="" rel="apple-touch-icon" sizes="120x120" />
@@ -46,7 +46,7 @@
         <%= link_to image_tag("unfound-sounds-logo.png"), "/", remote: true %>
     </div>
     <div class="header--title">
-        <a data-remote="true" href="/"><h1>Unfound Sounds</h1></a>
+        <a href="/"><h1>Unfound Sounds</h1></a>
     </div>
     <nav class="header--navigation">
         <% if current_user %>
@@ -67,9 +67,8 @@
 <% if flash[:alert] %>
     <p id="flash_alert" class="messages alter"><%= flash[:alert] %></p>
 <% end %>
-<div class="wrapper">
-    <%= yield %>
-</div>
+
+<%= yield %>
 
 </body>
 </html>

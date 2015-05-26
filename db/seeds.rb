@@ -160,8 +160,30 @@ jacob = User.create(email: "jacob@example.com", first_name: "Jacob", last_name: 
 
 tyler = User.create(email: "tyler@example.com", first_name: "Tyler", last_name: "Swain", password: "password", password_confirmation: "password", username: "tyler")
 
-round_four.users = [aaron, jacob, tyler]
+round_five.users = [aaron, jacob, tyler]
 
 deleted_scenes.create_find(user_id: aaron.id)
 willie.create_find(user_id: jacob.id)
 future_islands.create_find(user_id: tyler.id)
+
+round_six = Round.create(month: Date.parse("2015-06-01"))
+
+meat_puppets = Album.create(title: "II", band: "Meat Puppets", rdio_link: "https://rd.io/i/QUWZfCJT5o8/", cover: "https://unfound-sounds-images.s3.amazonaws.com/uploads/album/cover/16/meat-puppets.jpg")
+father_john = Album.create(title: "I Love You, Honeybear", band: "Father John Misty", rdio_link: "https://rd.io/i/QUWZfCISDqU/")
+tallest_man = Album.create(title: "Dark Bird Is Home", band: "Tallest Man on Earth", rdio_link: "https://rd.io/i/QUWZfCIJ2rE/")
+
+round_six.albums << meat_puppets
+round_six.albums << father_john
+round_six.albums << tallest_man
+
+fresh_produce = Place.create(name: "Fresh Produce", description: "", link: "https://www.facebook.com/thinklemonly", link_text: "visit Fresh Produce online", address: "400 N. Main Ave., Suite 100", city: "Sioux Falls", state: "SD")
+
+meat_puppets.places << fresh_produce
+
+nap = Place.create(name: "Nebraska Aids Project", description: "", link: "http://www.nap.org/", link_text: "visit Nebraska Aids Project online", address: "250 S. 77th St.", city: "Omaha", state: "NE")
+
+father_john.places << nap
+
+nonprofit = Place.create(name: "Nonprofit Hub", description: "", link: "http://lincoln.nonprofithub.org/", link_text: "visit The Nonprofit Hub online", address: "211 N. 14th St.", city: "Lincoln", state: "NE")
+
+tallest_man.places << nonprofit

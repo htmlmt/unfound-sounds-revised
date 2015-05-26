@@ -44,22 +44,24 @@ nav h3 {
     width: calc(50% - 1rem);
     display: inline-block;
     margin: 0 .5rem;
+    border-bottom: 5px solid $siteBlack;
 }
 
 @media only screen and (min-width: $smallTabletBreakpoint) {
     .header {
         @include flexbox();
+        @include flexbox-justify-content(center);
         @include flexbox-align-items(flex-end);
     }
     
     .header--logo {
-        width: 7.4%;
+        width: 50px;
         margin-right: 1rem;
         display: block;
     }
     
     .header--title {
-        width: 60%;
+        width: 320px;
     }
     
     .header--title h1 {
@@ -74,8 +76,12 @@ nav h3 {
 }
 
 @media only screen and (min-width: 750px) {
+    .header--title {
+        width: 400px;
+    }
+    
     .header--logo {
-        width: 5.75%;
+        width: 55px;
     }
     
     .header--title h1 {
@@ -84,6 +90,10 @@ nav h3 {
 }
 
 @media only screen and (min-width: 960px) {
+    .header--title {
+        width: 60%;
+    }
+    
     .header--logo {
         width: 8%;
     }

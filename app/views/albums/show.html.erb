@@ -1,29 +1,89 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @album.title %>
-</p>
-
-<p>
-  <strong>Band:</strong>
-  <%= @album.band %>
-</p>
-
-<p>
-  <strong>Cover:</strong>
-  <%= @album.cover %>
-</p>
-
-<p>
-  <strong>Rdio link:</strong>
-  <%= @album.rdio_link %>
-</p>
-
-<p>
-  <strong>Found:</strong>
-  <%= @album.found %>
-</p>
-
-<%= link_to 'Edit', edit_album_path(@album) %> |
-<%= link_to 'Back', albums_path %>
+<% @album.places.each do |place| %>
+    <% @gmaps_link = place.address + ' ' + place.city + ' ' + place.state %>
+    <% @gmaps_link.gsub!(' ', '+') %>
+<% end %>
+<div class="body">
+    <main class="body--main">
+        <div class="body--albums">
+            <section class="albums--album">
+                <div class="album--image">
+                    <%= image_tag(@album.cover) %>
+                </div>
+            </section>
+            <div class="album--content">
+                <header class="content--title">
+                    <h1><%= "\"#{@album.title}\" by #{@album.band}" %></h1>
+                </header>
+                <% if @album.find != nil %>
+                    <% @album.places.each do |place| %>
+                        <div class="content--description">
+                            <h4>
+                                <em>found at <%= link_to place.name, place.link %> by 
+                                <%= link_to "#{@album.find.user.first_name} #{@album.find.user.last_name}", user_path(@album.find.user) %>
+                                </em>
+                            </h4>
+                        </div>
+                        <div class="content--photo">
+                            <div class="photo--background" style="background-image: url(<%= @album.find.photo %>)">
+                            </div>
+                            <div class="photo--text">
+                                <p><%= place.description %></p>
+                                <p>Visit <%= place.name %>: 
+                                <a href="https://www.google.com/maps/place/<%= @gmaps_link %>" target="_blank">
+                                    <%= place.address %> in <%= place.city %>
+                                </a></p>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <% @album.places.each do |place| %>
+                        <% if place.city != "" %>
+                            <div class="content--description">
+                                <h4>
+                                    <em>
+                                        <% if @album.round.month != Date.today.beginning_of_month %>
+                                            will be
+                                        <% end %>
+                                        hidden somewhere in <%= place.city %></em>
+                                </h4>
+                            </div>
+                        <% end %>
+                        <% if Date.today.beginning_of_month == @album.round.month %>
+                            <% @album.hints.each_with_index do |hint, index| %>
+                                <div class="content--photo">
+                                    <div class="photo--text">
+                                        <h5>hint #<%= index + 1 %></h5>
+                                        <p><%= hint.description %></p>
+                                        <div class="next-prev--container">
+                                            <p class="text--hints">
+                                                see more hints
+                                            </p>
+                                            <% if index == 0 %>
+                                                <div class="text--next first">▶</div>
+                                            <% elsif index > 0 && index + 1 < @album.hints.count && Date.today.day >= @album.hints.count %>
+                                                <div class="text--prev">◀</div>
+                                                <div class="text--next">▶</div>
+                                            <% else %>
+                                                <div class="text--prev">◀</div>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                    <div class="photo--background" style="background-image: url(<%= hint.photo %>)">
+                                    </div>
+                                </div>
+                            <% end %>
+                        <% else %>
+                            <div class="content--photo">
+                                <div class="photo--text">
+                                    <a href="<%= @album.link %>" target="_blank"><%= @album.link_text %></a>
+                                </div>
+                                <div class="photo--background">
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </main>
+</div>

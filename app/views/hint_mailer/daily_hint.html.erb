@@ -1,0 +1,9 @@
+<p><%= @user.first_name %>,</p>
+<p>Today's hint in <%= @user.city %>:</p>
+<p><%= @hint.description %></p>
+<p><%= @hint.photo %></p>
+<p>The next treasure hunt will start on <%= Date.today.at_beginning_of_month.next_month.strftime("%A, %B %e") %>. You've bought in for $1.99, and will be receiving hints via email every day the treasure hunt continues in your city.</p>
+<p>If you'd like to change your email frequency, update your profile, or refund your account, visit your profile page: <%= user_url(@user) %>.</p>
+<p>Have fun, and happy hunting!</p>
+<p>All the best,<br>
+Michael</p>
