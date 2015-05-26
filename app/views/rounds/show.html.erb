@@ -1,13 +1,10 @@
-<main class="body">
-    <% if @round != nil %>
-        <% if Round.where("month > ?", @round.month).order("month DESC") != [] %>
-            <div class="body--prev">
-                <a data-remote="true" href="/rounds/<%= Round.where("month > ?", @round.month).order("month ASC").first.id %>">
-                    <%= image_tag "prev.png" %>
-                </a>
-            </div>
+<div class="body">
+    <main class="body--main">
+        <% if @current_round == true %>
+            <div class="body--albums current_round">
+        <% else %>
+            <div class="body--albums upcoming_round">
         <% end %>
-        <div class="body--albums">
             <% @round.albums.each do |album| %>
                 <section class="albums--album">
                     <%= link_to album_path(album), class: "album--link" do |link| %>
@@ -17,98 +14,6 @@
                     <% end %>
                 </section>
             <% end %>
-            <% @round.albums.each_with_index do |album, index| %>
-                <div class="album--content">
-                    <header class="content--title">
-                        <h1><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></h1>
-                    </header>
-                    <% if album.find.user != nil %>
-                        <% album.places.each do |place| %>
-                            <div class="content--description">
-                                <h4>
-                                    <em>found at <%= link_to place.name, place.link %> by 
-                                    <%= link_to "#{album.find.user.first_name} #{album.find.user.last_name}", user_path(album.find.user) %>
-                                    </em>
-                                </h4>
-                            </div>
-                            <div class="content--photo">
-                                <div class="photo--background" style="background-image: url(<%= album.find.photo %>)">
-                                </div>
-                                <div class="photo--text">
-                                    <p><%= place.description %></p>
-                                    <p>Visit <%= place.name %>: 
-                                    <a href="https://www.google.com/maps/place/<%= @gmaps_links[index] %>" target="_blank">
-                                        <%= place.address %> in <%= place.city %>
-                                    </a></p>
-                                </div>
-                            </div>
-                        <% end %>
-                    <% else %>
-                        <% album.places.each do |place| %>
-                            <% if place.city != "" %>
-                                <div class="content--description">
-                                    <h4>
-                                        <em>
-                                            <% if @round.month != Date.today.beginning_of_month %>
-                                                will be
-                                            <% end %>
-                                            hidden somewhere in <%= place.city %></em>
-                                    </h4>
-                                </div>
-                            <% end %>
-                            <% if Date.today.beginning_of_month == @round.month %>
-                                <% album.hints.each_with_index do |hint, index| %>
-                                    <div class="content--photo">
-                                        <div class="photo--text">
-                                            <h5>hint #<%= index + 1 %></h5>
-                                            <p><%= hint.description %></p>
-                                            <div class="next-prev--container">
-                                                <p class="text--hints">
-                                                    see more hints
-                                                </p>
-                                                <% if index == 0 %>
-                                                    <div class="text--next first">▶</div>
-                                                <% elsif index > 0 && index + 1 < album.hints.count && Date.today.day >= album.hints.count %>
-                                                    <div class="text--prev">◀</div>
-                                                    <div class="text--next">▶</div>
-                                                <% else %>
-                                                    <div class="text--prev">◀</div>
-                                                <% end %>
-                                            </div>
-                                        </div>
-                                        <div class="photo--background" style="background-image: url(<%= hint.photo %>)">
-                                        </div>
-                                    </div>
-                                <% end %>
-                            <% else %>
-                                <div class="content--photo">
-                                    <div class="photo--text">
-                                        <a href="<%= album.link %>" target="_blank"><%= album.link_text %></a>
-                                    </div>
-                                    <div class="photo--background">
-                                    </div>
-                                </div>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                </div>
-            <% end %>
         </div>
-        <% if Round.where("month < ?", @round.month).order("month DESC") != [] %>
-            <div class="body--next">
-                <a data-remote="true" href="/rounds/<%= Round.where("month < ?", @round.month).order("month DESC").first.id %>">
-                    <%= image_tag "next.png" %>
-                </a>
-            </div>
-        <% end %>
-    <% else %>
-        <img src="" alt="Next vinyl treasure hunt coming soon"/>
-    <% end %>
-</main>
-<div class="body--round">
-    <% if @round != nil %>
-        <h3>Vinyl Treasure Hunt, Round <%= @round.id %>: <%= @round.month.strftime("%B 1-8, %Y") %></h3>
-    <% else %>
-        <h3>Please wait until the first treasure hunt is scheduled.</h3>
-    <% end %>
+    </main>
 </div>

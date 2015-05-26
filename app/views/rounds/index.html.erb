@@ -1,6 +1,14 @@
 <% number_of_rounds = @rounds.length %>
 <div class="body">
-    <main class="body--main">
+    <% if @current_round == true %>
+        <main class="body--main current-round">
+            <h1>THE VINYL TREASURE HUNT IS ON</h1>
+            <h3><em>It started <%= Date.today.beginning_of_month.strftime("%A, %B %e") %></em></h3>
+    <% else %>
+        <main class="body--main upcoming-round">
+            <h1>THE NEXT VINYL TREASURE HUNT AWAITS YOU</h1>
+            <h3><em>Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>,<br> these albums will be hidden in local businesses.</em></h3>
+    <% end %>
         <div class="body--albums">
             <% @round.albums.each do |album| %>
                 <section class="albums--album">
@@ -8,11 +16,20 @@
                         <div class="album--image">
                             <%= image_tag(album.cover) %>
                         </div>
+                        <div class="album--info">
+                            <p><%= link_to "\"#{album.title}\" by #{album.band}", album_path(album) %></p>
+                            <% album.places.each do |place| %>
+                                <em>hidden in <%= place.city %></em>
+                            <% end %>
+                        </div>
                     <% end %>
                 </section>
             <% end %>
         </div>
     </main>
+    <header class="body--found-header">
+        <h1>FOUND SOUNDS</h1>
+    </header>
     <% @rounds.each_with_index do |round, index| %>
         <% @gmaps_links = [] %>
         <% round.albums.each do |album|  %>

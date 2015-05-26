@@ -32,7 +32,11 @@ Rails.application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
   
-
+  # config.after_initialize do
+  #   # Set Time.now to September 1, 2008 10:05:00 AM (at this instant), but allow it to move forward
+  #   t = Time.local(2015, 6, 1, 10, 5, 0)
+  #   Timecop.travel(t)
+  # end
 
   # Specify what domain to use for mailer URLs
   config.action_mailer.default_url_options = {host: "localhost:5000"}
