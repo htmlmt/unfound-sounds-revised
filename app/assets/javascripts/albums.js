@@ -71,38 +71,45 @@ function showAlbumInfo() {
     function toggleAlbumInfo(e) {
         e.preventDefault();
         if (showingAlbumInfo === false) {
-            link = $(this).children(".album--link").attr('href');
-            roundLink = window.location.href;
-            history.pushState(null, $(this).children(".album--slug"), link);
-            $(this).addClass("top");
-            if ($(this).index() === 0) {
-                $(this).siblings().first().addClass('move-once');
-                $(this).siblings().last().addClass('move-twice');
-                $(this).fadeIn(500);
-            } else if ($(this).index() === 1) {
-                $(this).addClass('move-once');
-                $(this).siblings().last().addClass('move-twice');
-                $(this).siblings().first().fadeIn(500);
+            if (Modernizr.mq('(min-width: 584px)')) {
+                link = $(this).children(".album--link").attr('href');
+                roundLink = window.location.href;
+                $(this).addClass("top");
+                history.pushState(null, $(this).children(".album--slug"), link);
+                if ($(this).index() === 0) {
+                    $(this).siblings(".albums--album").first().addClass("move-once");
+                    $(this).siblings(".albums--album").last().addClass("move-twice");
+                    $(this).fadeIn(500);
+                    $(this).siblings(".albums--info").first().addClass("show");
+                } else if ($(this).index() === 1) {
+                    $(this).addClass("move-once");
+                    $(this).siblings(".albums--album").last().addClass("move-twice");
+                    $(this).siblings(".albums--album").first().fadeIn(500);
+                    $(this).siblings(".albums--info").first().next().addClass("show");
+                } else {
+                    $(this).addClass("move-twice");
+                    $(this).siblings(".albums--album").last().addClass("move-once");
+                    $(this).fadeIn(500);
+                    $(this).siblings(".albums--info").last().addClass("show");
+                }
+                $(".body--round").on("click", toggleAlbumInfo);
+                $(".body--round").css("cursor", "pointer");
+                $(this).addClass("hide");
+                showingAlbumInfo = true;
             } else {
-                $(this).addClass('move-twice');
-                $(this).siblings().last().addClass('move-once');
-                $(this).fadeIn(500);
+                
             }
-            $(".body--round").on("click", toggleAlbumInfo);
-            $(".body--round").css("cursor", "pointer");
-
-            showingAlbumInfo = true;
         } else {
-            link = $(this).children(".album--link").attr('href');
-            history.pushState(null, "", roundLink);
-            $(".album--content").fadeOut(500);
-            $(".albums--album").removeClass("move-once");
-            $(".albums--album").removeClass("move-twice");
-            $(".albums--album").removeClass("top");
-            $(".body--round").off("click", toggleAlbumInfo);
-            $(".body--round").css("cursor", "text");
-
-            showingAlbumInfo = false;
+            if (Modernizr.mq('(min-width: 584px)')) {
+                link = $(this).children(".album--link").attr('href');
+                history.pushState(null, "", roundLink);
+                $(".albums--info").removeClass('show');
+                $(".albums--album").removeClass("move-once");
+                $(".albums--album").removeClass("move-twice");
+                $(".albums--album").removeClass("top");
+                $(this).removeClass("hide");
+                showingAlbumInfo = false;
+            }
         }
     }
 }

@@ -3,4 +3,5 @@
     <%= f.collection_select :user_id, User.all, :id, :full_name, prompt: true %><br />
     <%= f.label :photo, "Photo" %><br />
     <%= f.file_field :photo %>
+    <%= link_to "remove", '#', class: "remove_fields" %>
 </fieldset>

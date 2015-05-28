@@ -1,5 +1,6 @@
 class RoundsController < ApplicationController
   before_action :set_round, only: [:index, :signup, :participants, :show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /rounds
   # GET /rounds.json
@@ -52,6 +53,11 @@ class RoundsController < ApplicationController
 
   # GET /rounds/1/edit
   def edit
+    @round.albums.each do |album|
+      unless album.find
+        1.times { album.build_find }
+      end
+    end
   end
 
   # POST /rounds

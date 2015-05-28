@@ -1,9 +1,19 @@
-<% number_of_rounds = @rounds.length %>
+<% @round.users.each do |user| %>
+    <% if user == current_user %>
+        <% @joined = true %>
+    <% else %>
+        <% @joined = false %>
+    <% end %>
+<% end %>
 <div class="body">
     <% if @current_round == true %>
         <main class="body--main current-round">
             <h1>THE VINYL TREASURE HUNT IS ON</h1>
-            <p>It started <%= Date.today.beginning_of_month.strftime("%A, %B %e") %>. Sign up or login to see hints.</p>
+            <% if @joined %>
+                <p>Welcome back, <%= current_user.first_name %>.</p>
+            <% else %>
+                <p>It started <% if Date.today.beginning_of_month == Date.today %>today<% else %><%= Date.today.beginning_of_month.strftime("%A, %B %e") %><% end %>. <a href="rounds/signup">Sign up</a> or <a href="login">login</a> to see hints.</p>
+            <% end %>
     <% else %>
         <main class="body--main upcoming-round">
             <h1>GET READY FOR THE NEXT VINYL TREASURE HUNT</h1>
@@ -12,7 +22,11 @@
         <% if @current_round == true %>
             <div class="body--albums">
                 <% @round.albums.each do |album| %>
-                    <section class="albums--album">
+                    <% if @joined == true %>
+                        <section class="albums--album moving-album">
+                    <% else %>
+                        <section class="albums--album">
+                    <% end %>
                         <%= link_to album_path(album), class: "album--link" do |link| %>
                             <div class="album--image">
                                 <%= image_tag(album.cover) %>
@@ -22,6 +36,47 @@
                                 <% album.places.each do |place| %>
                                     <em>hidden in <%= place.city %></em>
                                 <% end %>
+                            </div>
+                            <% if album.find %>
+                                <% if album.find.user != nil %>
+                                    <% if @joined == true %>
+                                        <div class="album--signup">
+                                            <h1>This album has been found. See details.</h1>
+                                        </div>
+                                    <% else %>
+                                        <a href="rounds/signup">
+                                            <div class="album--signup">
+                                                <h1>To receive hints,<br> join the hunt</h1>
+                                            </div>
+                                        </a>
+                                    <% end %>
+                                <% else %>
+                                    <% if @joined == true %>
+                                        <div class="album--signup">
+                                            <h1>See hints.</h1>
+                                        </div>
+                                    <% else %>
+                                        <a href="rounds/signup">
+                                            <div class="album--signup">
+                                                <h1>To receive hints,<br> join the hunt</h1>
+                                            </div>
+                                        </a>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </section>
+                <% end %>
+                <% @round.albums.each do |album| %>
+                    <section class="albums--info">
+                        <% album.hints.each_with_index do |hint, index| %>
+                            <div class="info--photo">
+                                <%= image_tag(hint.photo) %>
+                            </div>
+                            <div class="info--text">
+                                <h4>hint no. <%= index + 1 %></h4>
+                                <p><%= hint.description %></p>
+                                <p><em>Check back tomorrow for another hint, if the album remains unfound.</em></p>
                             </div>
                         <% end %>
                     </section>
@@ -63,39 +118,51 @@
             </div>
         <% end %>
     </main>
-    <!-- <header class="body--found-header">
-        <h1>FOUND SOUNDS</h1>
-    </header>
-    <% @rounds.each_with_index do |round, index| %>
-        <% @gmaps_links = [] %>
-        <% round.albums.each do |album|  %>
-          <% album.places.each do |place| %>
-            <% gmaps_link = place.address + ' ' + place.city + ' ' + place.state %>
-            <% gmaps_link.gsub!(' ', '+') %>
-            <% @gmaps_links << gmaps_link %>
-          <% end %>
-        <% end %>
-        <% if round != nil %>
-            <div class="body--albums">
-                <% round.albums.each do |album| %>
-                    <section class="albums--album moving-album">
-                        <%= link_to album_path(album), class: "album--link" do |link| %>
-                            <div class="album--image">
-                                <%= image_tag(album.cover) %>
+    <div class="body--found-container">
+        <header class="body--found-header">
+            <h1>FOUND SOUNDS</h1>
+        </header>
+        <% @rounds.each_with_index do |round, index| %>
+            <% @gmaps_links = [] %>
+            <% round.albums.each do |album|  %>
+              <% album.places.each do |place| %>
+                <% gmaps_link = place.address + ' ' + place.city + ' ' + place.state %>
+                <% gmaps_link.gsub!(' ', '+') %>
+                <% @gmaps_links << gmaps_link %>
+              <% end %>
+            <% end %>
+            <% if round != nil %>
+                <div class="body--albums">
+                    <% round.albums.each do |album| %>
+                        <section class="albums--album moving-album">
+                            <%= link_to album_path(album), class: "album--link" do |link| %>
+                                <div class="album--image">
+                                    <%= image_tag(album.cover) %>
+                                </div>
+                                <div class="album--info">
+                                    <p><%= "\"#{album.title}\" by #{album.band}" %></p>
+                                    <% album.places.each do |place| %>
+                                        <em>found at <%= place.name %> by  <%= "#{album.find.user.first_name} #{album.find.user.last_name}" %>
+                                        </em>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </section>
+                    <% end %>
+                    <% round.albums.each do |album| %>
+                        <section class="albums--info">
+                            <% album.places.each do |place| %>
+                                <%= place.name %>
+                            <% end %>
+                            <div class="info--background">
+                                <%= album.find.photo %>
                             </div>
-                            <div class="album--info">
-                                <p><%= "\"#{album.title}\" by #{album.band}" %></p>
-                                <% album.places.each do |place| %>
-                                    <em>found at <%= place.name %> by  <%= "#{album.find.user.first_name} #{album.find.user.last_name}" %>
-                                    </em>
-                                <% end %>
-                            </div>
-                        <% end %>
-                    </section>
-                <% end %>
-            </div>
-        <% else %>
-            <img src="" alt="Next vinyl treasure hunt coming soon"/>
+                        </section>
+                    <% end %>
+                </div>
+            <% else %>
+                <img src="" alt="Next vinyl treasure hunt coming soon"/>
+            <% end %>
         <% end %>
-    <% end %> -->
+    </div>
 </div>
