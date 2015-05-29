@@ -31,7 +31,7 @@ Rails.application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
   
-  config.action_mailer.default_url_options = {host: "unfoundsounds-revised.herokuapp.com"}
+  config.action_mailer.default_url_options = {host: "unfoundsounds.com"}
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
