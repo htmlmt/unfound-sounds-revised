@@ -14,6 +14,8 @@ $(document).on("page:load", function(){
         $(this).parent().parent().parent().next().fadeIn();
         $(this).parent().parent().parent().next().children('.info--text').addClass('show');
     });
+    
+    $("#notice").css("top", "-100%");
 });
 
 $(document).ready(function(){
@@ -33,6 +35,8 @@ $(document).ready(function(){
         $('.info--text').removeClass('show');
         $(this).parent().parent().parent().next().children('.info--text').addClass('show');
     });
+    
+    $("#notice").css("top", "-100%");
 });
 
 // $(document).on('click', '.header--logo a[data-remote=true]', function(e) {

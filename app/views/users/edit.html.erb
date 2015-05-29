@@ -1,6 +1,46 @@
-<h1>Editing user</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="login--container">
+<main class="login">
+    <h1>Edit your profile</h1>
+    <p><%= flash.notice %></p>
+    <%= form_for @user, html: { class: "body--register" } do |f| %>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+                <h2>
+                    <%= pluralize(@user.errors.count, "error") %>
+                    prohibited this user from being saved:
+                </h2>
+                <ul>
+                    <% @user.errors.full_messages.each do |message| %>
+                        <li>
+                            <%= message %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <div class="register--field">
+            <%= f.label :first_name %><br>
+            <%= f.text_field :first_name %>
+        </div>
+        <div class="register--field">
+            <%= f.label :last_name %><br>
+            <%= f.text_field :last_name %>
+        </div>
+        <div class="register--field">
+            <%= f.label "Username" %><br>
+            <%= f.text_field :username %>
+        </div>
+        <div class="register--field">
+            <%= f.label :email %><br>
+            <%= f.text_field :email %>
+        </div>
+        <div class="register--field">
+            <%= f.label :city %><br>
+            <%= f.select :city, [["Lincoln", "Lincoln"], ["Omaha", "Omaha"], ["Sioux Falls", "Sioux Falls"]] %>
+        </div>
+        <div class="actions">
+            <%= f.submit "Submit" %>
+        </div>
+    <% end %>
+</main>
+</div>

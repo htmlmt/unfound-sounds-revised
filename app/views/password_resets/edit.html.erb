@@ -1,3 +1,5 @@
+<div class="login--container">
+<main class="login">
 <h1>Choose a new password</h1>
 <%= form_for @user, :url => password_reset_path(@token), :html => {:method => :put} do |f| %>
   <% if @user.errors.any? %>
@@ -28,3 +30,5 @@
     <%= f.submit %>
   </div>
 <% end %>
+</main>
+</div>

@@ -48,6 +48,11 @@ input:focus, textarea:focus {
     width: 100%;
 }
 
+.body--register .actions {
+    float: left;
+    width: 100%;
+}
+
 .login, #flash_alert {
     max-width: 1125px;
     margin: 0 auto;
