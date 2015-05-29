@@ -1,6 +1,7 @@
 class RoundsController < ApplicationController
   before_action :set_round, only: [:index, :signup, :participants, :show, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :edit, :create, :update, :destroy]
+  before_action :require_admin, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /rounds
   # GET /rounds.json
@@ -101,6 +102,12 @@ class RoundsController < ApplicationController
   end
 
   private
+    def require_admin
+      if current_user.email != 'michael@unfoundsounds.com'
+        redirect_to root_url, alert: 'Sorry, you don\'t have access to that page.'
+      end
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_round
       if params[:id]

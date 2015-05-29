@@ -432,6 +432,11 @@ body {
         top: 2%;
         border-bottom: 10px solid transparent;
         transition-duration: .5s;
+        height: 98%;
+    }
+    
+    .info--photo img {
+        max-height: 100%;
     }
     
     .info--text {
