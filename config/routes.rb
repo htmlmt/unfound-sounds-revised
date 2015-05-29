@@ -8,21 +8,11 @@ Rails.application.routes.draw do
   get 'rounds/signup'
   
   get 'rounds/:id/participants' => "rounds#participants", :as => "participants"
-
-  resources :finds
-
-  resources :features
-
+  
   root 'rounds#index'
   
-  resources :hints
-
   resources :albums
-
-  resources :finders
-
-  resources :places
-
+  
   resources :rounds
   
   resources :password_resets

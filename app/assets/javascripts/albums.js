@@ -2,14 +2,17 @@ $(document).on("page:load", function(){
     if (Modernizr.mq('(min-width: 584px)')) {
         showAlbumInfo();
     }
-    $(".text--prev").click(function(){
-        $(this).parent().parent().parent().hide();
-        $(this).parent().parent().parent().prev().css("display", "flex");
+    $(".button--prev").click(function(){
+        $(this).parent().parent().parent().fadeOut();
+        $(this).parent().parent().parent().prev().fadeIn();
+        console.log($(this).parent().parent().parent().prev().children('.info--text'));
+        $(this).parent().parent().parent().prev().children('.info--text').addClass('show');
     });
 
-    $(".text--next").click(function(){
-        $(this).parent().parent().parent().hide();
-        $(this).parent().parent().parent().next().css("display", "flex");
+    $(".button--next").click(function(){
+        $(this).parent().parent().parent().fadeOut();
+        $(this).parent().parent().parent().next().fadeIn();
+        $(this).parent().parent().parent().next().children('.info--text').addClass('show');
     });
 });
 
@@ -17,14 +20,18 @@ $(document).ready(function(){
     if (Modernizr.mq('(min-width: 584px)')) {
         showAlbumInfo();
     }
-    $(".text--prev").click(function(){
-        $(this).parent().parent().parent().hide();
-        $(this).parent().parent().parent().prev().css("display", "flex");
+    $(".button--prev").click(function(){
+        $(this).parent().parent().parent().fadeOut();
+        $(this).parent().parent().parent().prev().fadeIn();
+        $('.info--text').removeClass('show');
+        $(this).parent().parent().parent().prev().children('.info--text').addClass('show');
     });
 
-    $(".text--next").click(function(){
-        $(this).parent().parent().parent().hide();
-        $(this).parent().parent().parent().next().css("display", "flex");
+    $(".button--next").click(function(){
+        $(this).parent().parent().parent().fadeOut();
+        $(this).parent().parent().parent().next().fadeIn();
+        $('.info--text').removeClass('show');
+        $(this).parent().parent().parent().next().children('.info--text').addClass('show');
     });
 });
 

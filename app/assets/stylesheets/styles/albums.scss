@@ -358,32 +358,104 @@ body {
         transition-duration: 1s;
         width: 65.8%;
         padding: 0.5rem 0;
-        background-color: $white;
+    }
+    
+    .info--text.found {
+        opacity: 1;
+    }
+    
+    .info--text.found h4, .info--text.found p {
+        color: $white;
     }
     
     .albums--info.show {
         opacity: 1;
+        z-index: 50;
+    }
+    
+    .info-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+    }
+    
+    .info--button {
+        position: absolute;
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        padding-top: 9%;
+        background-color: $siteGreen;
+        text-align: center;
+    }
+    
+    .albums--info img {
+        display: block;
+    }
+    
+    .button--prev {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        @include transform-translate(0, -50%);
+        width: (100%/3);
+        color: $white;
+        cursor: pointer;
+    }
+    
+    .button--hints {
+        position: absolute;
+        width: (100%/3);
+        left: 0;
+        right: 0;
+        top: 50%;
+        @include transform-translate(0, -50%);
+        margin: 0 auto;
+        color: $white;
+    }
+    
+    .button--next {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        @include transform-translate(0, -50%);
+        width: (100%/3);
+        color: $white;
+        cursor: pointer;
     }
     
     .info--photo {
         position: absolute;
-        height: 98%;
-        bottom: 0;
-        border-bottom: 10px solid white;
+        width: calc(100% - 220px);
+        top: 2%;
+        border-bottom: 10px solid transparent;
+        transition-duration: .5s;
     }
     
     .info--text {
-        width: 28%;
+        width: 200px;
         margin-left: auto;
+        position: absolute;
+        top: 2%;
+        right: 0;
+        opacity: 0;
+        transition-duration: .5s;
+    }
+    
+    .info--text a em {
+        color: $white;
+        text-decoration: underline;
+    }
+    
+    .info--text.show {
+        opacity: 1;
     }
     
     .info--text p {
         text-align: left;
         padding: 0;
-    }
-    
-    .albums--info img {
-        height: 100%;
     }
     
     .albums--album {

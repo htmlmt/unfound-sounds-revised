@@ -33,7 +33,7 @@ Rails.application.configure do
   }
   
   config.after_initialize do
-    t = Time.local(2015, 6, 1, 10, 5, 0)
+    t = Time.local(2015, 6, 2, 10, 5, 0)
     Timecop.travel(t)
   end
 
