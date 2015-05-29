@@ -103,7 +103,7 @@
                                     <% end %>
                                         <h4>hint no. <%= index + 1 %></h4>
                                         <p><%= hint.description %></p>
-                                        <% if index == album.hints.size - 1 %>
+                                        <% if index + 1 == Date.today.day %>
                                             <p><em>Check back tomorrow for another hint, if the album remains unfound.</em></p>
                                         <% end %>
                                     </div>

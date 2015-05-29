@@ -35,25 +35,25 @@ $(document).ready(function(){
     });
 });
 
-$(document).on('click', '.header--logo a[data-remote=true]', function(e) {
-    history.pushState({}, '', $(this).attr('href'));
-});
-
-$(document).on('click', '.header--title a[data-remote=true]', function(e) {
-    history.pushState({}, '', $(this).attr('href'));
-});
-
-$(document).on('click', '.body--prev a[data-remote=true]', function(e) {
-    history.pushState({}, '', $(this).attr('href'));
-});
-
-$(document).on('click', '.body--next a[data-remote=true]', function(e) {
-    history.pushState({}, '', $(this).attr('href'));
-});
-
-$(window).on('popstate', function () {
-    $.get(document.location.href)
-});
+// $(document).on('click', '.header--logo a[data-remote=true]', function(e) {
+//     history.pushState({}, '', $(this).attr('href'));
+// });
+//
+// $(document).on('click', '.header--title a[data-remote=true]', function(e) {
+//     history.pushState({}, '', $(this).attr('href'));
+// });
+//
+// $(document).on('click', '.body--prev a[data-remote=true]', function(e) {
+//     history.pushState({}, '', $(this).attr('href'));
+// });
+//
+// $(document).on('click', '.body--next a[data-remote=true]', function(e) {
+//     history.pushState({}, '', $(this).attr('href'));
+// });
+//
+// $(window).on('popstate', function () {
+//     $.get(document.location.href)
+// });
 
 $('.body--next').on("click", function(){
     $(this).addClass("next");
@@ -82,7 +82,7 @@ function showAlbumInfo() {
                 link = $(this).children(".album--link").attr('href');
                 roundLink = window.location.href;
                 $(this).addClass("top");
-                history.pushState(null, $(this).children(".album--slug"), link);
+                // history.pushState(null, $(this).children(".album--slug"), link);
                 if ($(this).index() === 0) {
                     $(this).siblings(".albums--album").first().addClass("move-once");
                     $(this).siblings(".albums--album").last().addClass("move-twice");
@@ -109,7 +109,7 @@ function showAlbumInfo() {
         } else {
             if (Modernizr.mq('(min-width: 584px)')) {
                 link = $(this).children(".album--link").attr('href');
-                history.pushState(null, "", roundLink);
+                // history.pushState(null, "", roundLink);
                 $(".albums--info").removeClass('show');
                 $(".albums--album").removeClass("move-once");
                 $(".albums--album").removeClass("move-twice");
