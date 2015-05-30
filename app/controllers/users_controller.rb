@@ -24,47 +24,11 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
-  def create
-    current_round_finished = false
-    finds = []
-    upcoming_round = Round.where(month: Date.today.beginning_of_month + 1.month).first
-    current_round = Round.where("month <= ?", Date.today).order("month DESC").first
-    
-    current_round.albums.each do |album|
-      if album.find.user != nil
-        finds << album
-      end
-    end
-    
-    if finds.count == 3 
-      current_round_finished = true
-    end
-    
-    if upcoming_round != nil && current_round_finished == true
-      @round = upcoming_round
-    else
-      @round = current_round
-    end
-    
-    if user_params["card_token"] != ""
-      user_params.merge(card_token: user_params["card_token"])
-    end
-    
+  def create    
     @user = User.new(user_params)
     
     respond_to do |format|
       if @user.save
-        if @user.card_token
-          customer = Stripe::Customer.create email: @user.email, source: @user.card_token
-          Stripe::Charge.create customer: customer.id,
-                                amount: user_params["amount"] * 100,
-                                description: "Vinyl Treasure Hunt",
-                                currency: 'usd'
-        end
-        if @user.email != ""
-          UserMailer.signup_confirmation(@user).deliver_now
-        end
-        @round.users << @user
         session[:user_id] = @user.id
         format.html { redirect_to :root }
         format.json { render :show, status: :created, location: @user }
