@@ -1,6 +1,7 @@
 <% @round.users.each do |user| %>
     <% if user == current_user %>
         <% @joined = true %>
+        <% break %>
     <% else %>
         <% @joined = false %>
     <% end %>
