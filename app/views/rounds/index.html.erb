@@ -18,6 +18,8 @@
                         <% else %>
                             <section class="albums--album moving-album" style="border-bottom: 10px solid #578280">
                         <% end %>
+                    <% else %>
+                        <section class="albums--album moving-album">
                     <% end %>
                         <div class="album--image">
                             <%= image_tag(album.cover) %>
