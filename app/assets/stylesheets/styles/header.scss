@@ -53,6 +53,7 @@ nav h3 {
     width: calc(50% - 1rem);
     display: inline-block;
     margin: 0 .5rem;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: $smallTabletBreakpoint) {

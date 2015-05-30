@@ -481,36 +481,28 @@ textarea[readonly] {
 	color: $textboxPlaceholderColor;
 	font-size: $textboxPlaceholderSize;
 	font-style: $textboxPlaceholderStyle;
-	text-transform: uppercase;
 	font-family: $baseFont;
-	line-height: 2;
 }
 
 :-moz-placeholder {
 	color: $textboxPlaceholderColor;
 	font-size: $textboxPlaceholderSize;
 	font-style: $textboxPlaceholderStyle;
-	text-transform: uppercase;
 	font-family: $baseFont;
-	line-height: 2;
 }
 
 ::-moz-placeholder {
 	color: $textboxPlaceholderColor;
 	font-size: $textboxPlaceholderSize;
 	font-style: $textboxPlaceholderStyle;
-	text-transform: uppercase;
 	font-family: $baseFont;
-	line-height: 2;
 }
 
 :-ms-input-placeholder {
 	color: $textboxPlaceholderColor;
 	font-size: $textboxPlaceholderSize;
 	font-style: $textboxPlaceholderStyle;
-	text-transform: uppercase;
 	font-family: $baseFont;
-	line-height: 2;
 }
 
 /* BUTTON SIZES */

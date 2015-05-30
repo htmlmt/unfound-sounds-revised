@@ -34,6 +34,11 @@ Rails.application.configure do
   }
   
   config.action_mailer.default_url_options = {host: "unfoundsounds.com"}
+  
+  config.after_initialize do
+    t = Time.local(2015, 6, 2, 10, 5, 0)
+    Timecop.travel(t)
+  end
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.

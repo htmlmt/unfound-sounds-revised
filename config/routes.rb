@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   
   get 'rounds/:id/participants' => "rounds#participants", :as => "participants"
   
+  get 'albums/:id/check' => "albums#check"
+  
   root 'rounds#index'
   
   resources :albums

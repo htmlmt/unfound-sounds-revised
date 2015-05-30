@@ -29,6 +29,7 @@ body {
 
 .body--found-container {
     background-color: #444444;
+    padding-bottom: 2rem;
 }
 
 .body--found-header h1 {
@@ -74,6 +75,7 @@ body {
     background: #fff;
     @include drop-shadow();
     border-bottom: 10px solid $siteRed;
+    cursor: pointer;
 }
 
 .album--signup {
@@ -106,11 +108,11 @@ body {
 }
 
 .albums--album.move-once {
-    @include transform-translate(-108%, 0);
+    @include transform-translate(-101%, 0);
 }
 
 .albums--album.move-twice {
-    @include transform-translate(-215%, 0);
+    @include transform-translate(-204%, 0);
 }
 
 .albums--album:hover .album--info {
@@ -120,6 +122,10 @@ body {
 .album--image {
     position: relative;
     z-index: 0;
+}
+
+.albums--info {
+    display: none;
 }
 
 .album--info {
@@ -315,6 +321,76 @@ body {
     text-decoration: underline;
 }
 
+.info--text.found.current h4, .info--text.found.current p, , .info--text.found.current p a em {
+    color: #444444;
+}
+
+.info--check {
+    background-color: $siteRed;
+    color: white;
+    font-family: 'bebas-neue';
+    text-align: center;
+    padding: 10px 2%;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.hidden {
+    position: absolute;
+    bottom: 0;
+}
+
+.body--flash, .body--donate, .body--about {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 500;
+}
+
+.body--donate, .body--about {
+    display: none;
+}
+
+.flash-container, .about-container, .donate-container {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 50%;
+    background-color: white;
+    border: 1px solid #444444;
+    padding: 3%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    @include transform-translate(0, -50%);
+}
+
+.flash--close, .about--close, .donate--close {
+    position: absolute;
+    top: 10%;
+    width: 20px;
+    right: 3%;
+    cursor: pointer;
+}
+
+.album--close {
+    width: 40px;
+    padding: 10px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .9);
+    display: none;
+}
+
+.body--about a, .body--donate a {
+    color: $siteRed;
+    text-decoration: underline;
+}
+
 @media only screen and (min-width: $smallTabletBreakpoint) {
     body {
         display: block;
@@ -353,6 +429,7 @@ body {
         top: 0;
         right: 0;
         opacity: 0;
+        display: block;
         z-index: 0;
         height: 100%;
         transition-duration: 1s;
@@ -383,12 +460,11 @@ body {
     
     .info--button {
         position: absolute;
-        width: 100%;
-        right: 0;
-        bottom: 0;
-        padding-top: 9%;
+        padding-top: 40px;
         background-color: $siteGreen;
         text-align: center;
+        width: 100%;
+        bottom: 0;
     }
     
     .albums--info img {
@@ -427,12 +503,45 @@ body {
     }
     
     .info--photo {
+        padding-top: calc(90% - 220px);
+    }
+    
+    .info--photo, .info--form {
         position: absolute;
         width: calc(100% - 220px);
         top: 2%;
-        border-bottom: 10px solid transparent;
         transition-duration: .5s;
-        height: 98%;
+        height: 96.25%;
+    }
+    
+    .info--form {
+        display: none;
+        padding: 3%;
+        background-color: rgba(255, 255, 255, .9);
+    }
+    
+    .info--form p {
+        text-align: left;
+        margin: 1rem 0;
+        padding: 0;
+    }
+    
+    .info--form h3 {
+        margin: 0;
+        text-align: left;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form--close {
+        width: 20px;
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        cursor: pointer;
+    }
+    
+    .info--form input {
+        width: 90%;
     }
     
     .info--photo img {
@@ -456,6 +565,7 @@ body {
     
     .info--text.show {
         opacity: 1;
+        height: 96.25%;
     }
     
     .info--text p {

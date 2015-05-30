@@ -82,7 +82,7 @@ class RoundsController < ApplicationController
   def update
     respond_to do |format|
       if @round.update(round_params)
-        format.html { redirect_to @round }
+        format.html { redirect_to :root }
         format.json { render :show, status: :ok, location: @round }
       else
         format.html { render :edit }

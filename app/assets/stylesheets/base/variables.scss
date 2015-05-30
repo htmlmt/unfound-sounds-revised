@@ -13,7 +13,7 @@ $siteGold: #c6bd77;
 $siteGreen: #578280;
 
 $largeMobileBreakpoint: 29.5em; 	// <472px
-$smallTabletBreakpoint: 36.5em; 	// <592px
+$smallTabletBreakpoint: 800px; 	// <592px
 $tabletBreakpoint: 47.5em;			// <768px
 $desktopBreakpoint: 63em;			// <1024px
 $widescreenBreakpoint: 79.5em;		// <1280px
@@ -79,14 +79,14 @@ $linkFocus: darken($linkColor,15%);
 $linkWeight: bold;
 
 // Forms
-$textboxBackground: #e2e2e2;
-$textboxBorderColor: #e2e2e2;
+$textboxBackground: $white;
+$textboxBorderColor: $siteGreen;
 $textboxBorderColorActive: $siteGreen;
 $textboxBorderWidth: 1px;
 $textboxBorderStyle: solid;
 $textboxColor: $textColor;
 $textboxPlaceholderColor: $midGrey;
-$textboxPlaceholderSize: .875em;
+$textboxPlaceholderSize: 1em;
 $textboxPlaceholderStyle: normal; //Change to italic if you want placeholder text to be italic.
 $textboxPadding: .375em 1.5em;
 $textboxOutline: none;

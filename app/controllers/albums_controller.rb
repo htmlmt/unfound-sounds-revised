@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :set_album, only: [:show, :edit, :update, :destroy]
+  before_action :set_album, only: [:check, :show, :edit, :update, :destroy]
 
   # GET /albums
   # GET /albums.json
@@ -19,6 +19,23 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
+  end
+  
+  def check
+    answer = false
+    
+    @album.places.each do |place|
+      if place.name == params[:place]
+        answer = true
+      end
+    end
+    
+    if answer == true
+      redirect_to :root, alert: "You\'re right! Get to #{params[:place]} fast, and pick up that great album by #{@album.band}."
+    else
+      CheckMailer.check(params[:place], "\"#{@album.title}\"", params[:email]).deliver_now
+      redirect_to :root, alert: "Sorry, that's not what we have. We'll double-check to see if you provided an alternate spelling, and email you if so."
+    end
   end
 
   # POST /albums
