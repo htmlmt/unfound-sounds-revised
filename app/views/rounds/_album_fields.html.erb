@@ -7,12 +7,6 @@
     <%= f.text_field :band %><br />
     <%= f.label :cover, "Cover" %><br />
     <%= f.file_field :cover %>
-    <%= f.label :review, "Review" %><br />
-    <%= f.text_area :review %>
-    <%= f.label :link, "Link" %><br />
-    <%= f.text_field :link %><br />
-    <%= f.label :link_text, "Link text" %><br />
-    <%= f.text_field :link_text %><br />
     
     <br>
     
@@ -34,9 +28,10 @@
     <hr>
     <br>
     
-    <%= f.fields_for :find do |builder| %>
-        <%= render 'find_fields', f: builder %>
-    <% end %>
+    <%= f.label :finder, "Finder" %><br />
+    <%= f.text_field :finder %>
+    <%= f.label :finder_photo, "Photo" %><br />
+    <%= f.file_field :finder_photo %>
     
     <br>
     <hr>

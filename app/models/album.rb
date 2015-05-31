@@ -13,4 +13,5 @@ class Album < ActiveRecord::Base
   accepts_nested_attributes_for :hints, allow_destroy: true
   
   mount_uploader :cover, CoverUploader
+  mount_uploader :finder_photo, FinderUploader
 end

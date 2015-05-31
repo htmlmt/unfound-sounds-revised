@@ -1,8 +1,8 @@
 round_one = Round.create(month: Date.parse("2014-05-01"))
 
-beck = Album.create(title: "Morning Phase", band: "Beck", rdio_link: "https://rd.io/i/QUWZfCJhwN8/")
-bonnie = Album.create(title: "I See a Darkness", band: "Bonnie \"Prince\" Billy", link: "https://www.youtube.com/watch?v=LAriDxTeed8", link_text: "listen on YouTube")
-patrick = Album.create(title: "Adventures in Your Own Backyard", band: "Patrick Watson", rdio_link: "https://rd.io/i/QUWZfCJINgM/")
+beck = Album.create(title: "Morning Phase", band: "Beck", rdio_link: "https://rd.io/i/QUWZfCJhwN8/", finder: "Jeff Spiehs")
+bonnie = Album.create(title: "I See a Darkness", band: "Bonnie \"Prince\" Billy", link: "https://www.youtube.com/watch?v=LAriDxTeed8", link_text: "listen on YouTube", finder: "Tim Guthrie")
+patrick = Album.create(title: "Adventures in Your Own Backyard", band: "Patrick Watson", rdio_link: "https://rd.io/i/QUWZfCJINgM/", finder: "Shelly Lynn Xiong")
 
 round_one.albums << beck
 round_one.albums << bonnie
@@ -20,23 +20,11 @@ ocs = Place.create(name: "Omaha Code School", description: "Omaha Code School of
 
 patrick.places << ocs
 
-jeff = User.create(email: "jeff@example.com", first_name: "Jeff", last_name: "Spiehs", password: "password", password_confirmation: "password", username: "jeff")
-
-tim = User.create(email: "tim@example.com", first_name: "Tim", last_name: "Guthrie", password: "password", password_confirmation: "password", username: "tim")
-
-shelly = User.create(email: "shelly@example.com", first_name: "Shelly Lynn", last_name: "Xiong", password: "password", password_confirmation: "password", username: "shelly")
-
-round_one.users << [jeff, tim, shelly]
-
-beck.create_find(user_id: jeff.id)
-bonnie.create_find(user_id: tim.id)
-patrick.create_find(user_id: shelly.id)
-
 round_two = Round.create(month: Date.parse("2014-06-01"))
 
-kishi = Album.create(title: "Lighght", band: "Kishi Bashi", rdio_link: "https://rd.io/i/QUWZfCIclAc/")
-bright = Album.create(title: "I'm Wide Awake, It's Morning", band: "Bright Eyes", rdio_link: "https://rd.io/i/QUWZfCJUC3E/")
-lucius = Album.create(title: "Wildewoman", band: "Lucius", rdio_link: "https://rd.io/i/QUWZfCJrd9U/")
+kishi = Album.create(title: "Lighght", band: "Kishi Bashi", rdio_link: "https://rd.io/i/QUWZfCIclAc/", finder: "Molly Misek")
+bright = Album.create(title: "I'm Wide Awake, It's Morning", band: "Bright Eyes", rdio_link: "https://rd.io/i/QUWZfCJUC3E/", finder: "Dan McCarthy")
+lucius = Album.create(title: "Wildewoman", band: "Lucius", rdio_link: "https://rd.io/i/QUWZfCJrd9U/", finder: "Brittany Rypkema")
 
 round_two.albums << kishi
 round_two.albums << bright
@@ -54,23 +42,11 @@ ivanna = Place.create(name: "Ivanna Cone", description: "A one-of-a-kind, family
 
 lucius.places << ivanna
 
-molly = User.create(email: "molly@example.com" , first_name: "Molly", last_name: "Misek", password: "password", password_confirmation: "password", username: "molly")
-
-dan = User.create(email: "dan@example.com", first_name: "Dan", last_name: "McCarthy", password: "password", password_confirmation: "password", username: "dan")
-
-brittany = User.create(email: "brittany@example.com", first_name: "Brittany", last_name: "Rypkema", password: "password", password_confirmation: "password", username: "brittany")
-
-round_two.users << [molly, dan, brittany]
-
-kishi.create_find(user_id: molly.id)
-bright.create_find(user_id: dan.id)
-lucius.create_find(user_id: brittany.id)
-
 round_three = Round.create(month: Date.parse("2014-07-01"))
 
-kill_county = Album.create(title: "Dust In Wire", band: "Kill County", rdio_link: "https://rd.io/i/QUWZfCIOln8/")
-jack_hotel = Album.create(title: "Good Sons And Daughters", band: "Jack Hotel", rdio_link: "")
-first_aid_kit = Album.create(title: "Stay Gold", band: "First Aid Kit", rdio_link: "https://rd.io/i/QUWZfCIacDw/")
+kill_county = Album.create(title: "Dust In Wire", band: "Kill County", rdio_link: "https://rd.io/i/QUWZfCIOln8/", finder: "Dan and Liz Nissen")
+jack_hotel = Album.create(title: "Good Sons And Daughters", band: "Jack Hotel", rdio_link: "", finder: "Matthew Mejstrik")
+first_aid_kit = Album.create(title: "Stay Gold", band: "First Aid Kit", rdio_link: "https://rd.io/i/QUWZfCIacDw/", finder: "Jeff Spiehs")
 
 round_three.albums << kill_county
 round_three.albums << jack_hotel
@@ -88,21 +64,11 @@ creative = Place.create(name: "Omaha Creative Institute", description: "Omaha Cr
 
 first_aid_kit.places << creative
 
-liz = User.create(email: "liz@example.com" , first_name: "Liz", last_name: "Nissen", password: "password", password_confirmation: "password", username: "liz")
-
-matthew = User.create(email: "matthew@example.com", first_name: "Matthew", last_name: "Mejstrik", password: "password", password_confirmation: "password", username: "matthew")
-
-round_three.users << [liz, matthew, jeff]
-
-kill_county.create_find(user_id: liz.id)
-jack_hotel.create_find(user_id: matthew.id)
-first_aid_kit.create_find(user_id: jeff.id)
-
 round_four = Round.create(month: Date.parse("2014-08-01"))
 
-chuck_brown = Album.create(title: "Bustin' Loose", band: "Chuck Brown", rdio_link: "https://rd.io/i/QUWZfCJaVUc/")
-eternal_summers = Album.create(title: "The Drop Beneath", band: "Eternal Summers", rdio_link: "https://rd.io/i/QUWZfCJgZxE/")
-mccarthy_trenching = Album.create(title: "Plays Piano", band: "McCarthy Trenching")
+chuck_brown = Album.create(title: "Bustin' Loose", band: "Chuck Brown", rdio_link: "https://rd.io/i/QUWZfCJaVUc/", finder: "Will Hertzler")
+eternal_summers = Album.create(title: "The Drop Beneath", band: "Eternal Summers", rdio_link: "https://rd.io/i/QUWZfCJgZxE/", finder: "Curtis Wong")
+mccarthy_trenching = Album.create(title: "Plays Piano", band: "McCarthy Trenching", finder: "Jordan Delmundo")
 
 round_four.albums << chuck_brown
 round_four.albums << eternal_summers
@@ -120,23 +86,11 @@ ocf = Place.create(name: "Omaha Community Foundation", description: "OCF is a no
 
 mccarthy_trenching.places << ocf
 
-will = User.create(email: "will@example.com" , first_name: "Will", last_name: "Hertzler", password: "password", password_confirmation: "password", username: "will")
-
-curtis = User.create(email: "curtis@example.com", first_name: "Curtis", last_name: "Wong", password: "password", password_confirmation: "password", username: "curtis")
-
-jordan = User.create(email: "jordan@example.com", first_name: "Jordan", last_name: "Delmundo", password: "password", password_confirmation: "password", username: "jordan")
-
-round_four.users = [will, matthew, jordan]
-
-chuck_brown.create_find(user_id: will.id)
-eternal_summers.create_find(user_id: curtis.id)
-mccarthy_trenching.create_find(user_id: jordan.id)
-
 round_five = Round.create(month: Date.parse("2014-09-01"))
 
-deleted_scenes = Album.create(title: "Lithium Burn", band: "Deleted Scenes", rdio_link: "https://rd.io/i/QUWZfCJg-AI/")
-willie = Album.create(title: "Red Headed Stranger", band: "Willie Nelson", rdio_link: "https://rd.io/i/QUWZfCJclmA/")
-future_islands = Album.create(title: "Singles", band: "Future Islands", rdio_link: "https://rd.io/i/QUWZfCIfQkw/")
+deleted_scenes = Album.create(title: "Lithium Burn", band: "Deleted Scenes", rdio_link: "https://rd.io/i/QUWZfCJg-AI/", finder: "Aaron Bauer")
+willie = Album.create(title: "Red Headed Stranger", band: "Willie Nelson", rdio_link: "https://rd.io/i/QUWZfCJclmA/", finder: "Jacob Zlomke")
+future_islands = Album.create(title: "Singles", band: "Future Islands", rdio_link: "https://rd.io/i/QUWZfCIfQkw/", finder: "Tyler Swain")
 
 round_five.albums << deleted_scenes
 round_five.albums << willie
@@ -154,21 +108,9 @@ grain = Place.create(name: "Grain & Mortar", description: "Grain & Mortar create
 
 future_islands.places << grain
 
-aaron = User.create(email: "aaron@example.com" , first_name: "Aaron", last_name: "Bauer", password: "password", password_confirmation: "password", username: "aaron")
-
-jacob = User.create(email: "jacob@example.com", first_name: "Jacob", last_name: "Zlomke", password: "password", password_confirmation: "password", username: "jacob")
-
-tyler = User.create(email: "tyler@example.com", first_name: "Tyler", last_name: "Swain", password: "password", password_confirmation: "password", username: "tyler")
-
-round_five.users = [aaron, jacob, tyler]
-
-deleted_scenes.create_find(user_id: aaron.id)
-willie.create_find(user_id: jacob.id)
-future_islands.create_find(user_id: tyler.id)
-
 round_six = Round.create(month: Date.parse("2015-06-01"))
 
-meat_puppets = Album.create(title: "II", band: "Meat Puppets", rdio_link: "https://rd.io/i/QUWZfCJT5o8/", cover: "https://unfound-sounds-images.s3.amazonaws.com/uploads/album/cover/16/meat-puppets.jpg")
+meat_puppets = Album.create(title: "II", band: "Meat Puppets", rdio_link: "https://rd.io/i/QUWZfCJT5o8/")
 father_john = Album.create(title: "I Love You, Honeybear", band: "Father John Misty", rdio_link: "https://rd.io/i/QUWZfCISDqU/")
 tallest_man = Album.create(title: "Dark Bird Is Home", band: "The Tallest Man on Earth", rdio_link: "https://rd.io/i/QUWZfCIJ2rE/")
 

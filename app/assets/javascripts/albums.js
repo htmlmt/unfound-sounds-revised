@@ -2,6 +2,7 @@ $(document).on("page:load", function(){
     if (Modernizr.mq('(min-width: 584px)')) {
         showAlbumInfo();
     }
+    
     $(".button--prev").click(function(){
         $(this).parent().parent().parent().hide();
         $(this).parent().parent().parent().prev().show();
@@ -49,6 +50,7 @@ $(document).ready(function(){
     if (Modernizr.mq('(min-width: 584px)')) {
         showAlbumInfo();
     }
+    
     $(".button--prev").click(function(){
         $(this).parent().parent().parent().hide();
         $(this).parent().parent().parent().prev().show();
@@ -133,9 +135,6 @@ function showAlbumInfo() {
                 $(".body--round").on("click", toggleAlbumInfo);
                 $(".body--round").css("cursor", "pointer");
                 $(this).addClass("hide");
-                showingAlbumInfo = true;
-            } else {
-                
                 showingAlbumInfo = true;
             }
         } else {

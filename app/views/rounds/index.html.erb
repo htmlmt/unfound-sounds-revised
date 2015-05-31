@@ -3,39 +3,33 @@
     <% if @current_round == true %>
         <main class="body--main current-round">
             <h1>THE VINYL TREASURE HUNT IS ON</h1>
-            <p>It started <% if Date.today.beginning_of_month == Date.today %>today<% else %><%= Date.today.beginning_of_month.strftime("%A, %B %e") %><% end %>.<br> These records are hidden in local establishments we love.</p>
+            <p class="main--description">It started <% if Date.today.beginning_of_month == Date.today %>today<% else %><%= Date.today.beginning_of_month.strftime("%A, %B %e") %><% end %>.<br> These records are hidden in local establishments we love.</p>
     <% else %>
         <main class="body--main upcoming-round">
             <h1>GET READY FOR THE NEXT VINYL TREASURE HUNT</h1>
-            <p>Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local establishments we love.</p>
+            <p class="main--description">Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local establishments we love.</p>
     <% end %>
         <% if @current_round == true %>
             <div class="body--albums">
                 <% @round.albums.each do |album| %>
-                    <% if album.find %>
-                        <% if album.find.user != nil %>
-                            <section class="albums--album moving-album">
-                        <% else %>
-                            <section class="albums--album moving-album" style="border-bottom: 10px solid #578280">
-                        <% end %>
-                    <% else %>
+                    <% if album.finder != "" %>
                         <section class="albums--album moving-album">
+                    <% else %>
+                        <section class="albums--album moving-album" style="border-bottom: 10px solid #578280">
                     <% end %>
                         <div class="album--image">
                             <%= image_tag(album.cover) %>
                         </div>
                         <div class="album--info">
                             <p><%= "\"#{album.title}\" by #{album.band}" %></p>
-                            <% if album.find %>
-                                <% if album.find.user != nil %>
-                                    <% album.places.each do |place| %>
-                                        <em>found at <%= place.name %><br> by  <%= "#{album.find.user.first_name} #{album.find.user.last_name}" %>
-                                        </em>
-                                    <% end %>
-                                <% else %>
-                                    <% album.places.each do |place| %>
-                                        <em>hidden in <%= place.city %></em>
-                                    <% end %>
+                            <% if album.finder != "" %>
+                                <% album.places.each do |place| %>
+                                    <em>found at <%= place.name %><br> by  <%= album.finder %>
+                                    </em>
+                                <% end %>
+                            <% else %>
+                                <% album.places.each do |place| %>
+                                    <em>hidden in <%= place.city %></em>
                                 <% end %>
                             <% end %>
                         </div>
@@ -43,81 +37,79 @@
                             <%= image_tag('close-expand.png') %>
                         </div>
                     </section>
-                    <% if album.find %>
-                        <% if album.find.user != nil %>
-                            <section class="albums--info">
-                                <div class="info--container">
-                                    <div class="info--photo" style="background-image: url(<%= album.find.photo %>); background-size: cover; background-position: 50% 50%;">
-                                    </div>
-                                    <div class="info--text found current">
-                                        <% album.places.each do |place| %>
-                                            <h4>found at <%= place.name %></h4>
-                                            <p><%= place.description %></p>
-                                            <p><a href="<%= place.link %>" target="_blank"><em><%= place.link_text %></em></a></p>
-                                        <% end %>
-                                    </div>
+                    <% if album.finder != "" %>
+                        <section class="albums--info">
+                            <div class="info--container">
+                                <div class="info--photo" style="background-image: url(<%= album.finder_photo %>); background-size: cover; background-position: 50% 50%;">
                                 </div>
-                            </section>
-                        <% else %>
-                            <section class="albums--info">
-                                <% album.hints.each_with_index do |hint, index| %>
-                                    <% if index + 1 <= Date.today.day %>
-                                        <div class="info-container">
-                                            <div class="info--photo" style="background-image: url(<%= hint.photo %>); background-size: cover; background-position: 50% 50%;">
-                                                <% unless album.hints.size == 1 %>
-                                                    <% unless Date.today.day == 1 %>
-                                                        <div class="info--button">
-                                                            <% unless index == 0 %>
-                                                                <div class="button--prev">
-                                                                    ◀
+                                <div class="info--text found current">
+                                    <% album.places.each do |place| %>
+                                        <h4>found at <%= place.name %></h4>
+                                        <p><%= place.description %></p>
+                                        <p><a href="<%= place.link %>" target="_blank"><em><%= place.link_text %></em></a></p>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </section>
+                    <% else %>
+                        <section class="albums--info">
+                            <% album.hints.each_with_index do |hint, index| %>
+                                <% if index + 1 <= Date.today.day %>
+                                    <div class="info-container">
+                                        <div class="info--photo" style="background-image: url(<%= hint.photo %>); background-size: cover; background-position: 50% 50%;">
+                                            <% unless album.hints.size == 1 %>
+                                                <% unless Date.today.day == 1 %>
+                                                    <div class="info--button">
+                                                        <% unless index == 0 %>
+                                                            <div class="button--prev">
+                                                                ◀
+                                                            </div>
+                                                        <% end %>
+                                                        <div class="button--hints">
+                                                            see more
+                                                        </div>
+                                                        <% unless index == album.hints.size - 1 %>
+                                                            <% if index + 2 <= Date.today.day %>
+                                                                <div class="button--next">
+                                                                    ▶
                                                                 </div>
                                                             <% end %>
-                                                            <div class="button--hints">
-                                                                see more
-                                                            </div>
-                                                            <% unless index == album.hints.size - 1 %>
-                                                                <% if index + 2 <= Date.today.day %>
-                                                                    <div class="button--next">
-                                                                        ▶
-                                                                    </div>
-                                                                <% end %>
-                                                            <% end %>
-                                                        </div>
-                                                    <% end %>
-                                                <% end %>
-                                            </div>
-                                            <%= form_tag("/albums/#{album.slug}/check", method: "get", class: "info--form") do %>
-                                                <h3>Take a guess</h3>
-                                                <%= image_tag("close-expand.png", class: "form--close") %>
-                                                <%= label_tag(:place, "Place name") %>
-                                                <%= text_field_tag(:place) %>
-                                                <%= label_tag(:email, "Your email address") %>
-                                                <%= text_field_tag(:email) %>
-                                                <p>(We'll email you if you provide an alternate place spelling.)</p>
-                                                <%= submit_tag("Submit") %>
-                                            <% end %>
-                                            <% if index + 1 == Date.today.day || index == album.hints.size - 1 %>
-                                                <div class="info--text show">
-                                            <% else %>
-                                                <div class="info--text">
-                                            <% end %>
-                                                <h4>hint no. <%= index + 1 %></h4>
-                                                <p><%= hint.description %></p>
-                                                <% if index + 1 == Date.today.day %>
-                                                    <p><em>Check back tomorrow for another hint, if the album remains unfound.</em></p>
-                                                <% end %>
-                                                <div class="hidden">
-                                                    <p>Know where it's hidden?</p>
-                                                    <div class="info--check">
-                                                        Take a guess
+                                                        <% end %>
                                                     </div>
+                                                <% end %>
+                                            <% end %>
+                                        </div>
+                                        <%= form_tag("/albums/#{album.slug}/check", method: "get", class: "info--form") do %>
+                                            <h3>Take a guess</h3>
+                                            <%= image_tag("close-expand.png", class: "form--close") %>
+                                            <%= label_tag(:place, "Place name") %>
+                                            <%= text_field_tag(:place) %>
+                                            <%= label_tag(:email, "Your email address") %>
+                                            <%= text_field_tag(:email) %>
+                                            <p>(We'll email you if you provide an alternate place spelling.)</p>
+                                            <%= submit_tag("Submit") %>
+                                        <% end %>
+                                        <% if index + 1 == Date.today.day || index == album.hints.size - 1 %>
+                                            <div class="info--text show">
+                                        <% else %>
+                                            <div class="info--text">
+                                        <% end %>
+                                            <h4>hint no. <%= index + 1 %></h4>
+                                            <p><%= hint.description %></p>
+                                            <% if index + 1 == Date.today.day %>
+                                                <p><em>Check back tomorrow for another hint, if the album remains unfound.</em></p>
+                                            <% end %>
+                                            <div class="hidden">
+                                                <p>Know where it's hidden?</p>
+                                                <div class="info--check">
+                                                    Take a guess
                                                 </div>
                                             </div>
                                         </div>
-                                    <% end %>
+                                    </div>
                                 <% end %>
-                            </section>
-                        <% end %>
+                            <% end %>
+                        </section>
                     <% end %>
                 <% end %>
             </div>
@@ -144,7 +136,7 @@
     </main>
     <div class="body--found-container">
         <header class="body--found-header">
-            <h1>FOUND SOUNDS</h1>
+            <h1>PAST ROUNDS</h1>
         </header>
         <% @rounds.each_with_index do |round, index| %>
             <% if round != nil %>
@@ -157,7 +149,7 @@
                             <div class="album--info">
                                 <p><%= "\"#{album.title}\" by #{album.band}" %></p>
                                 <% album.places.each do |place| %>
-                                    <em>found at <%= place.name %><br> by  <%= "#{album.find.user.first_name} #{album.find.user.last_name}" %>
+                                    <em>found at <%= place.name %><br> by  <%= album.finder %>
                                     </em>
                                 <% end %>
                             </div>
@@ -167,7 +159,7 @@
                         </section>
                         <section class="albums--info">
                             <div class="info--container">
-                                <div class="info--photo" style="background-image: url(<%= album.find.photo %>); background-size: cover; background-position: 50% 50%;">
+                                <div class="info--photo" style="background-image: url(<%= album.finder_photo %>); background-size: cover; background-position: 50% 50%;">
                                 </div>
                                 <div class="info--text found">
                                     <% album.places.each do |place| %>

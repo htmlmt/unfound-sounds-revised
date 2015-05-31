@@ -16,15 +16,27 @@ body {
     background-color: $white;
 }
 
+.body--main .main--description {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .body--main.current-round {
     background-color: $white;
 }
 
+.album--info {
+    padding: 5%;
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
 .body--main p {
-    text-align: center;
+    text-align: left;
     color: #444444;
     font-size: 1.2rem;
-    padding: 0 5%;
+    padding: 0;
 }
 
 .body--found-container {
@@ -76,6 +88,8 @@ body {
     @include drop-shadow();
     border-bottom: 10px solid $siteRed;
     cursor: pointer;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .album--signup {
@@ -122,17 +136,6 @@ body {
 .album--image {
     position: relative;
     z-index: 0;
-}
-
-.albums--info {
-    display: none;
-}
-
-.album--info {
-    padding: 5%;
-    width: 100%;
-    margin-bottom: 1rem;
-    text-align: center;
 }
 
 .album--info p {
@@ -335,11 +338,6 @@ body {
     cursor: pointer;
 }
 
-.hidden {
-    position: absolute;
-    bottom: 0;
-}
-
 .body--flash, .body--donate, .body--about {
     position: fixed;
     top: 0;
@@ -356,10 +354,10 @@ body {
 .flash-container, .about-container, .donate-container {
     max-width: 500px;
     margin: 0 auto;
-    width: 50%;
+    width: 90%;
     background-color: white;
     border: 1px solid #444444;
-    padding: 3%;
+    padding: 10%;
     position: absolute;
     top: 50%;
     left: 0;
@@ -369,7 +367,7 @@ body {
 
 .flash--close, .about--close, .donate--close {
     position: absolute;
-    top: 10%;
+    top: 10px;
     width: 20px;
     right: 3%;
     cursor: pointer;
@@ -391,8 +389,60 @@ body {
     text-decoration: underline;
 }
 
+.info--photo {
+    padding-top: 50%;
+    margin-bottom: 1rem;
+}
+
+.info--form {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.body--found-container {
+    display: none;
+}
+
+.info--button {
+    display: none;
+}
+
 @media only screen and (min-width: $smallTabletBreakpoint) {
     body {
+        display: block;
+    }
+    
+    .info--button {
+        display: block;
+    }
+    
+    .flash-container, .about-container, .donate-container {
+        width: 50%;
+        padding: 3%;
+    }
+    
+    .flash--close, .about--close, .donate--close {
+        top: 10%;
+    }
+
+    .body--found-container {
+        display: block;
+    }
+    
+    .body--main p {
+        text-align: center;
+    }
+
+    .hidden {
+        position: absolute;
+        bottom: 0;
+        display: block;
+    }
+
+    .info--form {
         display: block;
     }
     
@@ -410,6 +460,11 @@ body {
     
     .body--main .body--albums {
         margin: 0 auto;
+    }
+    
+    .albums--album {
+        margin-top: 0;
+        margin-bottom: 0;
     }
     
     .albums--album:nth-of-type(2) {
@@ -439,6 +494,13 @@ body {
     
     .info--text.found {
         opacity: 1;
+    }
+    
+    .album--info {
+        padding: 5%;
+        width: 100%;
+        margin-bottom: 1rem;
+        text-align: center;
     }
     
     .info--text.found h4, .info--text.found p {
@@ -504,6 +566,7 @@ body {
     
     .info--photo {
         padding-top: calc(90% - 220px);
+        margin-bottom: 0;
     }
     
     .info--photo, .info--form {

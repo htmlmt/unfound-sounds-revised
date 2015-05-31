@@ -143,7 +143,7 @@ class RoundsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def round_params
       params.require(:round).permit(:month,
-      albums_attributes: [:id, :title, :band, :cover, :rdio_link, :found, :link, :link_text, :round_id, :review,
+      albums_attributes: [:id, :title, :band, :cover, :rdio_link, :found, :link, :link_text, :round_id, :review, :finder, :finder_photo,
         places_attributes: [:id, :teaser, :name, :link, :address, :city, :state, :description, :link_text, :album_id],
         hints_attributes: [:id, :name, :description, :photo, :thumbnail, :album_id],
         find_attributes: [:id, :user_id, :album_id, :photo]
