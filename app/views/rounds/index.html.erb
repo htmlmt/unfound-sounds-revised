@@ -33,9 +33,6 @@
                                 <% end %>
                             <% end %>
                         </div>
-                        <div class="album--close">
-                            <%= image_tag('close-expand.png') %>
-                        </div>
                     </section>
                     <% unless album.finder == "" || album.finder == nil %>
                         <section class="albums--info">
@@ -152,9 +149,6 @@
                                     <em>found at <%= place.name %><br> by  <%= album.finder %>
                                     </em>
                                 <% end %>
-                            </div>
-                            <div class="album--close">
-                                <%= image_tag('close-expand.png') %>
                             </div>
                         </section>
                         <section class="albums--info">
