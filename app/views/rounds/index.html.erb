@@ -12,7 +12,7 @@
         <% if @current_round == true %>
             <div class="body--albums">
                 <% @round.albums.each do |album| %>
-                    <% if album.finder != "" %>
+                    <% unless album.finder == "" || album.finder == nil %>
                         <section class="albums--album moving-album">
                     <% else %>
                         <section class="albums--album moving-album" style="border-bottom: 10px solid #578280">
@@ -22,7 +22,7 @@
                         </div>
                         <div class="album--info">
                             <p><%= "\"#{album.title}\" by #{album.band}" %></p>
-                            <% if album.finder != "" %>
+                            <% unless album.finder == "" || album.finder == nil %>
                                 <% album.places.each do |place| %>
                                     <em>found at <%= place.name %><br> by  <%= album.finder %>
                                     </em>
@@ -37,7 +37,7 @@
                             <%= image_tag('close-expand.png') %>
                         </div>
                     </section>
-                    <% if album.finder != "" %>
+                    <% unless album.finder == "" || album.finder == nil %>
                         <section class="albums--info">
                             <div class="info--container">
                                 <div class="info--photo" style="background-image: url(<%= album.finder_photo %>); background-size: cover; background-position: 50% 50%;">
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="info--text found">
                                     <% album.places.each do |place| %>
-                                        <h4><%= place.name %></h4>
+                                        <h4>found at <%= place.name %></h4>
                                         <p><%= place.description %></p>
                                         <p><a href="<%= place.link %>" target="_blank"><em><%= place.link_text %></em></a></p>
                                     <% end %>
