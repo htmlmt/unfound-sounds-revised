@@ -36,7 +36,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host: "unfoundsounds.com"}
   
   config.after_initialize do
-    t = Time.local(2015, 6, 2, 4, 59, 30)
+    t = Time.local(2015, 6, 2, 4, 59, 50)
     Timecop.travel(t)
   end
 
