@@ -1,7 +1,7 @@
-class CheckMailer < ApplicationMailer
+class CorrectMailer < ApplicationMailer
   default from: "michael@unfoundsounds.com"
   
-  def check(place, album, email)
+  def correct(place, album, email)
     @album = album
     @place = place
     @email = email
