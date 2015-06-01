@@ -115,8 +115,8 @@ class RoundsController < ApplicationController
       else
         current_round_finished = false
         finds = []
-        upcoming_round = Round.where(month: (Date.today.beginning_of_month + 1.month)).first
-        current_round = Round.where(month: Date.today.beginning_of_month).first
+        upcoming_round = Round.where(month: (Time.zone.now.beginning_of_month + 1.month)).first
+        current_round = Round.where(month: Time.zone.now.beginning_of_month).first
         
         if current_round != nil
           current_round.albums.each do |album|
