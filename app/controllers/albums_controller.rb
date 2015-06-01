@@ -31,6 +31,7 @@ class AlbumsController < ApplicationController
     end
     
     if answer == true
+      CheckMailer.correct(params[:place], "\"#{@album.title}\"", params[:email]).deliver_now
       redirect_to :root, alert: "You\'re right! Get to #{params[:place]} fast, and pick up that great album by #{@album.band}."
     else
       CheckMailer.check(params[:place], "\"#{@album.title}\"", params[:email]).deliver_now
