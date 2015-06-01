@@ -3,7 +3,7 @@
     <% if @current_round == true %>
         <main class="body--main current-round">
             <h1>THE VINYL TREASURE HUNT IS ON</h1>
-            <p class="main--description">It started <% if Date.today.beginning_of_month == Date.today %>today<% else %><%= Date.today.beginning_of_month.strftime("%A, %B %e") %><% end %>.<br> These records are hidden in local establishments we love.</p>
+            <p class="main--description">It started <% if Time.zone.now.beginning_of_month.day == Time.zone.today.day %>today<% else %><%= Date.today.beginning_of_month.strftime("%A, %B %e") %><% end %>.<br> These records are hidden in local establishments we love.</p>
     <% else %>
         <main class="body--main upcoming-round">
             <h1>GET READY FOR THE NEXT VINYL TREASURE HUNT</h1>
@@ -51,11 +51,11 @@
                     <% else %>
                         <section class="albums--info">
                             <% album.hints.each_with_index do |hint, index| %>
-                                <% if index + 1 <= Date.today.day %>
+                                <% if index + 1 <= Time.zone.today.day %>
                                     <div class="info-container">
                                         <div class="info--photo" style="background-image: url(<%= hint.photo %>); background-size: cover; background-position: 50% 50%;">
                                             <% unless album.hints.size == 1 %>
-                                                <% unless Date.today.day == 1 %>
+                                                <% unless Time.zone.today.day == 1 %>
                                                     <div class="info--button">
                                                         <% unless index == 0 %>
                                                             <div class="button--prev">
@@ -66,7 +66,7 @@
                                                             see more
                                                         </div>
                                                         <% unless index == album.hints.size - 1 %>
-                                                            <% if index + 2 <= Date.today.day %>
+                                                            <% if index + 2 <= Time.zone.today.day %>
                                                                 <div class="button--next">
                                                                     ▶
                                                                 </div>
@@ -86,14 +86,14 @@
                                             <p>(We'll email you if you provide an alternate place spelling.)</p>
                                             <%= submit_tag("Submit") %>
                                         <% end %>
-                                        <% if index + 1 == Date.today.day || index == album.hints.size - 1 %>
+                                        <% if index + 1 == Time.zone.today.day || index == album.hints.size - 1 %>
                                             <div class="info--text show">
                                         <% else %>
                                             <div class="info--text">
                                         <% end %>
                                             <h4>hint no. <%= index + 1 %></h4>
                                             <p><%= hint.description %></p>
-                                            <% if index + 1 == Date.today.day %>
+                                            <% if index + 1 == Time.zone.today.day %>
                                                 <p><em>Check back tomorrow for another hint, if the album remains unfound.</em></p>
                                             <% end %>
                                             <div class="hidden">
