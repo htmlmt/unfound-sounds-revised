@@ -10,7 +10,7 @@
         <% if found_albums == 3 %>
             <main class="body--main current-round">
                 <h1>ENJOY THE FREE VINYL</h1>
-                <p class="main--description">This month's vinyl treasure hunt is a wrap. Please return <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %> when the next round begins.</p>
+                <p class="main--description">This month's vinyl treasure hunt is a wrap.<br> Please return <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %> when the next round begins.</p>
         <% else %>
             <main class="body--main current-round">
                 <h1>THE VINYL TREASURE HUNT IS ON</h1>
