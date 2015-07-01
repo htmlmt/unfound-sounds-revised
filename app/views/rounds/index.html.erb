@@ -27,7 +27,7 @@
     <% else %>
         <main class="body--main upcoming-round">
             <h1>GET READY FOR THE NEXT VINYL TREASURE HUNT</h1>
-            <p class="main--description">Starting <%= (Date.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local establishments we love.</p>
+            <p class="main--description">Starting <%= (Time.zone.today.beginning_of_month + 1.month).strftime("%A, %B %e") %>, these albums will be hidden in local establishments we love.</p>
     <% end %>
         <% if @current_round == true %>
             <div class="body--albums">
