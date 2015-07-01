@@ -17,10 +17,10 @@
                 <p class="main--description">
                     It started 
                         <% if Time.zone.now.beginning_of_month.day == Time.zone.today.day %>
-                            today
+                            today.
                         <% else %>
-                            <%= Date.today.beginning_of_month.strftime("%A, %B %e") %>
-                        <% end %>.
+                            <%= Date.today.beginning_of_month.strftime("%A, %B %e") %>.
+                        <% end %>
                     <br> These records are hidden in local establishments we love.
                 </p>
         <% end %>
